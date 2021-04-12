@@ -9,7 +9,7 @@ const router = new VueRouter({
   routes: [
     {
       path: "/",
-      redirect: "/mine",
+      redirect: "/home",
     },
     {
       path: "/home",

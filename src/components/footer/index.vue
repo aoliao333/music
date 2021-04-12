@@ -2,12 +2,12 @@
   <div class="footer">
     <div class="left"><van-icon name="orders-o" /></div>
     <ul>
-      <router-link to="/home" tag="li">
-        <span> <van-icon name="service-o"/></span>
-      </router-link>
       <router-link to="/fenlei" tag="li"
         ><span><van-icon name="music-o"/></span
       ></router-link>
+      <router-link to="/home" tag="li">
+        <span> <van-icon name="service-o"/></span>
+      </router-link>
       <router-link to="/cart" tag="li"
         ><span><van-icon name="friends-o"/></span
       ></router-link>
