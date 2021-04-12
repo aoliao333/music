@@ -21,7 +21,7 @@
         </div>
         <div class="popup-list_mid">
           <van-cell @click="cc" title="个性换肤" icon="location-o" />
-          <van-cell @click="cc" title="附近的人" icon="el-icon-guide" />
+          <van-cell title="附近的人" icon="el-icon-guide" />
         </div>
         <div class="popup-list_bot">
           <van-cell @click="cc" title="个性换肤" icon="location-o" />
