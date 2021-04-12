@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
+
 // 配置路由
 const router = new VueRouter({
   mode: "hash",

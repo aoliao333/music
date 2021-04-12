@@ -1,8 +1,5 @@
 <template>
-  <div class="">
-    音乐
-    <router-view></router-view>
-  </div>
+  <div class="day">每日推荐</div>
 </template>
 
 <script>
