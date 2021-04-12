@@ -1,12 +1,18 @@
 <template>
   <div class="footer">
+    <div class="left"><van-icon name="orders-o" /></div>
     <ul>
-      <router-link to="/home" tag="li">首页</router-link>
-      <router-link to="/fenlei" tag="li">分类</router-link>
-      <router-link to="/cart" tag="li">购物</router-link>
-      <router-link to="/order" tag="li">订单</router-link>
-      <router-link to="/mine" tag="li">我的</router-link>
+      <router-link to="/home" tag="li">
+        <span> <van-icon name="service-o"/></span>
+      </router-link>
+      <router-link to="/fenlei" tag="li"
+        ><span><van-icon name="music-o"/></span
+      ></router-link>
+      <router-link to="/cart" tag="li"
+        ><span><van-icon name="friends-o"/></span
+      ></router-link>
     </ul>
+    <div class="right"><van-icon name="search" /></div>
   </div>
 </template>
 
@@ -34,18 +40,35 @@ export default {
 </script>
 <style scoped>
 .footer {
+  display: flex;
+  justify-content: start;
   width: 100%;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   height: 40px;
   background-color: #eee;
 }
+.footer .right {
+  width: 10%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.footer .left {
+  width: 10%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
 .footer ul {
   display: flex;
+  width: 80%;
   justify-content: flex-start;
   align-items: center;
+  padding: 0 25%;
 }
+
 .footer ul li {
   flex: 1;
   height: 40px;

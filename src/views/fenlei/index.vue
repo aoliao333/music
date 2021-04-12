@@ -4,14 +4,6 @@
       <span><slot name="left">我的左边的插槽</slot></span>
       <slot>我是没有名字的插槽</slot>
     </Header>
-
-    <Scope>
-      <template slot-scope="parent">
-        <ul>
-          <li v-for="(item, index) in parent.lists" :key="index">{{ item }}</li>
-        </ul>
-      </template>
-    </Scope>
   </div>
 </template>
 
@@ -40,4 +32,8 @@ export default {
   updated() {},
 };
 </script>
-<style scoped></style>
+<style scoped>
+.fenlei {
+  margin-top: 40px;
+}
+</style>

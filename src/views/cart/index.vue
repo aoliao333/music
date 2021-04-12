@@ -24,4 +24,8 @@ export default {
   updated() {},
 };
 </script>
-<style scoped></style>
+<style scoped>
+.cart {
+  margin-top: 40px;
+}
+</style>
