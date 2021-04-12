@@ -19,18 +19,19 @@
           <van-cell @click="cc" title="我的好友" icon="manager-o" />
           <van-cell @click="cc" title="附近的人" icon="location-o" />
         </div>
-        <div class="popup-list_mid">
-          <van-cell @click="cc" title="个性换肤" icon="location-o" />
-          <van-cell title="附近的人" icon="el-icon-guide" />
-        </div>
         <div class="popup-list_bot">
-          <van-cell @click="cc" title="个性换肤" icon="location-o" />
-          <van-cell @click="cc" title="听歌识曲" icon="location-o" />
-          <van-cell @click="cc" title="定时停止播放" icon="location-o" />
-          <van-cell @click="cc" title="扫一扫" icon="location-o" />
-          <van-cell @click="cc" title="音乐闹钟" icon="location-o" />
-          <van-cell @click="cc" title="驾驶模式" icon="location-o" />
+          <van-cell @click="cc" title="个性换肤" icon="award-o" />
+          <van-cell title="听歌识曲" icon="service-o" />
+          <van-cell @click="cc" title="定时停止播放" icon="underway-o" />
+          <van-cell @click="cc" title="扫一扫" icon="scan" />
+          <van-cell @click="cc" title="音乐闹钟" icon="tosend" />
+          <van-cell @click="cc" title="驾驶模式" icon="logistics" />
         </div>
+      </div>
+      <div class="popup-bot">
+        <van-cell @click="cc" title="夜间模式" icon="comment-o" />
+        <van-cell @click="cc" title="设置" icon="diamond-o" />
+        <van-cell @click="cc" title="退出" icon="shopping-cart-o" />
       </div>
     </van-popup>
     <ul>
@@ -135,5 +136,7 @@ export default {
 }
 .popop-top button {
   margin-top: 10px;
+  height: 30px;
+  line-height: 10px;
 }
 </style>
