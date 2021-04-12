@@ -1,8 +1,5 @@
 <template>
-  <div class="">
-    音乐
-    <router-view></router-view>
-  </div>
+  <div class="musiclist">歌单</div>
 </template>
 
 <script>
