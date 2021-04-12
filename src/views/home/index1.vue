@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Header>
-      <span class="left"><span name="left"> &lt; 返回</span></span>
+      <span class="left"><span name="left"> &lt; 返回1111</span></span>
       <span>我是组件里面的东西</span>
       <span class="right">
         <span name="right">右边</span>
