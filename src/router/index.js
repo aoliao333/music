@@ -7,6 +7,8 @@ import VueRouter from "vue-router";
 
 //例如home的子路由
 import homechild from "../router/models/homechildren";
+// import fenleichild from "../router/models/fenleichildren";
+
 Vue.use(VueRouter);
 
 
@@ -39,6 +41,8 @@ const router = new VueRouter({
       meta: {
         showTabbar: true, //   登录前不显示底部导航
       },
+      // redirect: "/fenlei/bendiyinyue",
+      // children: fenleichild,
     },
     {
 

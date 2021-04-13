@@ -24,28 +24,75 @@
             <p class="wode-list-right">我的收藏<span>(0)</span></p>
         </div>
     </div>
-   <el-collapse v-model="activeNames" @change="handleChange">
-     <div class="gedan"></div>
-  <el-collapse-item title="创建的歌单(1)" name="1" >
-    <div class="el-icon-setting"></div>
-    <div>111</div>
-  </el-collapse-item>
-  
-</el-collapse>
+   <van-collapse v-model="activeNames" class="gedan">
+  <van-collapse-item title="创建的歌单" name="1">
+    <van-button type="primary" size="large" @click="chuangjiangedan"><van-icon name="plus" />创建新歌单</van-button>
+     <div class="gedan-list">
+           <van-image
+              width="75"
+              height="75"
+              src="https://img01.yzcdn.cn/vant/cat.jpeg"
+            />
+            <dl class="gedan-list-right"><dd>我喜欢的音乐</dd><dt>0首</dt></dl>
+            <van-button  type="default" is-link @click="showPopup"><van-icon class="gedanicon" name="ellipsis" />
+          </van-button>
+            <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
+          <van-popup v-model="show" position="bottom" :style="{ height: '30%' }">
+            <p>歌单：我喜欢的音乐</p>
+              <div class="wode-list">
+            <van-icon name="down" class="icon" size="25px" color="red"/>
+            <p class="wode-list-right">下载</p>
+        </div>
+        <div class="wode-list">
+            <van-icon name="share-o" class="icon" size="25px" color="red"/>
+            <p class="wode-list-right">分享</p>
+           
+        </div>
+</van-popup>
+        </div>
+  </van-collapse-item>
+  </van-collapse>
+  <div class="tuijian">
+    <h3>推荐歌单</h3>
+   <van-row gutter="20">
+  <van-col span="8"><van-image
+  height="10rem"
+  fit="contain"
+  src="https://img01.yzcdn.cn/vant/cat.jpeg"
+/></van-col>
+  <van-col span="8"><van-image
+  height="10rem"
+  fit="contain"
+  src="https://img01.yzcdn.cn/vant/cat.jpeg"
+/></van-col>
+  <van-col span="8"><van-image
+  height="10rem"
+  fit="contain"
+  src="https://img01.yzcdn.cn/vant/cat.jpeg"
+/></van-col>
+</van-row>
+  </div>
   </div>
 </template>
 
 <script>
 import Header from "../../components/header";
+// import {isLogined} from '../../utils/util'
+import { Dialog } from 'vant';
+import {tuijianDedan} from '../../api/four/bendi'
 
 export default {
   components: {
     Header,
+    [Dialog.Component.name]: Dialog.Component,
   },
   data() {
     
     return {
-      activeNames: ['1']
+      activeNames: ['1'],
+       show: false,
+       obj:null,
+      // message:
     };
   },
   //监听属性 类似于data概念
@@ -54,13 +101,36 @@ export default {
   watch: {},
 
   methods: {
-     handleChange(val) {
-        console.log(val);
-      }
+    async  getTuijiangedan(){
+    
+    const result=await tuijianDedan();
+    console.log(result);
+    console.log(11111111);
+  },
+       showPopup() {
+      this.show = true;
+    },
+    chuangjiangedan(){
+      console.log(111111111);
+      Dialog.confirm({
+  title: '新建歌单',
+  message: '<input type="text"  placeholder="请输入歌单标题">',
+})
+  .then(() => {
+    // on confirm
+  })
+  .catch(() => {
+    // on cancel
+  });
+    },
+   
   },
  
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+
+    this.getTuijiangedan();
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {},
@@ -69,9 +139,7 @@ export default {
   updated() {},
 };
 </script>
-<style scoped>
-@import url("//unpkg.com/element-ui@2.10.0/lib/theme-chalk/index.css");
-
+<style  scoped>
 
 .fenlei {
   margin-top: 40px;
@@ -82,25 +150,67 @@ export default {
 }
 .wode-list{
   width: 100%;
-  height: 76px;
-  line-height: 75px;
+  height: 56px;
+  line-height: 55px;
   display: flex;
 }
 .icon{
-  line-height: 75px;
+  line-height: 55px;
   margin-left: 10px;
   margin-right: 10px;
   width: 10%;
 }
 .wode-list-right{
-  height: 75px;
+  height: 55px;
   border-bottom: 1px #dadcdd solid;
   width: 90%;
 }
-.el-icon-setting{
+.van-collapse-item__content{
+  width: 100%;
+  padding: 12px 0px;
+}
+.van-button--large{
+  background-color:#f2f4f5 ;
+  color: red;
+  border: none;
   width: 100%;
 }
-.collapse-title { flex: 1 0 90%; order: 1; } .el-collapse-item__header { flex: 1 0 auto; order: -1; }
-
-
+.gedan{
+   background: #f2f4f5;
+}
+.gedan-list{
+  width: 100%;
+  height: 76px;
+  line-height: 75px;
+  display: flex;
+}
+.gedan-list-right{
+  height: 100px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  line-height: 35px;
+}
+.van-button--normal{
+  height: 100%;
+  border: none;
+}
+.van-button::before{
+opacity: 0;
+}
+.gedanicon{
+  font-size: 30px;
+}
+.tuijian{
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+   background: #f2f4f5;
+  margin-top: 10px;
+  
+}
+.tuijiangedan{
+  width: 100%;
+  height: 200px;
+}
 </style>
