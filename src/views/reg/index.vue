@@ -1,7 +1,9 @@
 <template>
-  <div class="login reg">
-    <van-uploader :after-read="afterRead" v-if="!imgurl" />
-    <img :src="imgurl" alt="" width="100" height="100" v-else />
+  <div class="reg">
+    <div class="mid">
+      <van-uploader :after-read="afterRead" v-if="!imgurl" />
+      <img :src="imgurl" alt="" width="100" height="100" v-else />
+    </div>
 
     <van-form @submit="onSubmit">
       <van-field
@@ -36,31 +38,41 @@
 </template>
 
 <script>
-
+import { reqReg } from "../../api/user";
+import { Toast } from "vant";
 export default {
   components: {},
   data() {
     return {
       username: "",
       password: "",
-      imgurl: "",
       nickName: "",
+      imgurl: "",
     };
   },
+  //监听属性 类似于data概念
   computed: {},
+  //监控data中的数据变化
   watch: {},
 
   methods: {
     afterRead(file) {
-      // 此时可以自行将文件上传至服务器
-      console.log(file);
-      this.imgurl = file.content;
+      this.imgurl = file.content; // base64  减少图片发起的请求
+      console.log(file.content);
     },
-     onSubmit(values) {
+    async onSubmit(values) {
       console.log("submit", values);
+      const result = await reqReg({ ...values, avatar: this.imgurl });
+      console.log(result);
+      if (result.status === 200) {
+        Toast.success("注册成功");
+        this.$router.replace("/login");
+      }
     },
   },
+  //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
+  //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {},
   beforeMount() {},
@@ -68,4 +80,10 @@ export default {
   updated() {},
 };
 </script>
-<style scoped></style>
+<style scoped>
+.mid {
+  position: fixed;
+  top: 210px;
+  left: 150px;
+}
+</style>
