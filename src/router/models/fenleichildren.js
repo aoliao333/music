@@ -1,11 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
-const homechild = [
+const fenleichild = [
   {
-    path: "music",
-    name: "Music",
-    component: () => import("../../views/home/models/music"), // 路由懒加载
+    path: "fenlei",
+    name: "Fenlei",
+    component: () => import("../../views/fenlei"), // 路由懒加载
     meta: {
       title: "音乐",
       showTabbar: true, //   登录前不显示底部导航
@@ -13,9 +13,9 @@ const homechild = [
     //音乐页面子路由配置
     children: [
       {
-        path: "fm",
-        name: "Fm",
-        component: () => import("../../views/home/models/music/four/fm"), // 路由懒加载
+        path: "bendiyinyue",
+        name: "bendiyinyue",
+        component: () => import("../../views/fenlei/bendiyinyue"), // 路由懒加载
         meta: {
           title: "音乐",
           showTabbar: false, //   登录前不显示底部导航
@@ -24,4 +24,4 @@ const homechild = [
     ],
   },
 ];
-export default homechild;
+export default fenleichild;

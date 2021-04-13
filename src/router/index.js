@@ -41,7 +41,7 @@ const router = new VueRouter({
       meta: {
         showTabbar: true, //   登录前不显示底部导航
       },
-      // redirect: "/fenlei/bendiyinyue",
+      // redirect: "/fenlei/",
       // children: fenleichild,
     },
     {
@@ -51,6 +51,24 @@ const router = new VueRouter({
       component: () => import("../views/cart/index.vue"), // 路由懒加载
       meta: {
         showTabbar: true, //   登录前不显示底部导航
+      },
+    },
+    {
+
+      path: "/bendiyinyue",  //头部导航第三个  音乐动态
+      name: "Bendiyinyue",
+      component: () => import("../views/fenlei/bendiyinyue"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+
+      path: "/wodeshoucang",  //头部导航第三个  音乐动态
+      name: "Wodeshoucang",
+      component: () => import("../views/fenlei/wodeshoucang"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
       },
     },
   ],

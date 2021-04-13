@@ -2,7 +2,7 @@
   <div class="fenlei">
     <Header></Header>
     <div class="wode">
-        <div class="wode-list">
+        <div class="wode-list" @click="toBendiyinyue">
             <van-icon name="music-o" class="icon" size="35px" color="red"/>
             <p class="wode-list-right">本地音乐<span>(0)</span></p>
         </div>
@@ -19,7 +19,7 @@
             <van-icon name="fire-o" class="icon" size="35px" color="red"/>
             <p class="wode-list-right">我的电台<span>(0)</span></p>
         </div>
-        <div class="wode-list">
+        <div class="wode-list" @click="toWodeshoucang">
             <van-icon name="manager-o" class="icon" size="35px" color="red"/>
             <p class="wode-list-right">我的收藏<span>(0)</span></p>
         </div>
@@ -58,18 +58,19 @@
   <van-col span="8"><van-image
   height="10rem"
   fit="contain"
-  src="https://img01.yzcdn.cn/vant/cat.jpeg"
-/></van-col>
+  :src="obj.result[0].picUrl"
+/> <p>{{obj.result[0].name}}</p>
+</van-col>
   <van-col span="8"><van-image
   height="10rem"
   fit="contain"
-  src="https://img01.yzcdn.cn/vant/cat.jpeg"
-/></van-col>
+  :src="obj.result[1].picUrl"
+/> <p>{{obj.result[1].name}}</p></van-col>
   <van-col span="8"><van-image
   height="10rem"
   fit="contain"
-  src="https://img01.yzcdn.cn/vant/cat.jpeg"
-/></van-col>
+  :src="obj.result[3].picUrl"
+/> <p>{{obj.result[3].name}}</p></van-col>
 </van-row>
   </div>
   </div>
@@ -80,6 +81,7 @@ import Header from "../../components/header";
 // import {isLogined} from '../../utils/util'
 import { Dialog } from 'vant';
 import {tuijianDedan} from '../../api/four/bendi'
+import {yonghuGedan} from '../../api/four/bendi'
 
 export default {
   components: {
@@ -92,6 +94,7 @@ export default {
       activeNames: ['1'],
        show: false,
        obj:null,
+       
       // message:
     };
   },
@@ -102,12 +105,19 @@ export default {
 
   methods: {
     async  getTuijiangedan(){
-    
     const result=await tuijianDedan();
-    console.log(result);
-    console.log(11111111);
+    if(result.status===200){
+      this.obj=result.data;
+      console.log( this.obj.result[0]);  
+    }
   },
-       showPopup() {
+  async getWodegedan(id){
+   
+    const result=await yonghuGedan(id);
+  console.log(result);
+
+  },
+    showPopup() {
       this.show = true;
     },
     chuangjiangedan(){
@@ -123,13 +133,20 @@ export default {
     // on cancel
   });
     },
-   
+   toBendiyinyue(){
+     this.$router.push({ path:'/bendiyinyue'})
+   },
+   toWodeshoucang(){
+     this.$router.push({ path:'/wodeshoucang'})
+
+   }
   },
  
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
 
     this.getTuijiangedan();
+    this.getWodegedan(35045027);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
