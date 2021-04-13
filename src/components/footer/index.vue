@@ -10,28 +10,28 @@
       </div>
       <div class="popup-list">
         <div class="popup-list_top">
-          <van-cell @click="cc" title="我的消息" icon="comment-o" />
-          <van-cell @click="cc" title="会员中心" icon="diamond-o" />
-          <van-cell @click="cc" title="商城" icon="shopping-cart-o" />
-          <van-cell @click="cc" title="在线听歌免流量" icon="coupon-o" />
+          <van-cell @click="goMyInfo" title="我的消息" icon="comment-o" />
+          <van-cell title="会员中心" icon="diamond-o" />
+          <van-cell @click="goShop" title="商城" icon="shopping-cart-o" />
+          <van-cell title="在线听歌免流量" icon="coupon-o" />
         </div>
         <div class="popup-list_mid">
-          <van-cell @click="cc" title="我的好友" icon="manager-o" />
-          <van-cell @click="cc" title="附近的人" icon="location-o" />
+          <van-cell title="我的好友" icon="manager-o" />
+          <van-cell title="附近的人" icon="location-o" />
         </div>
         <div class="popup-list_bot">
-          <van-cell @click="cc" title="个性换肤" icon="award-o" />
+          <van-cell title="个性换肤" icon="award-o" />
           <van-cell title="听歌识曲" icon="service-o" />
-          <van-cell @click="cc" title="定时停止播放" icon="underway-o" />
-          <van-cell @click="cc" title="扫一扫" icon="scan" />
-          <van-cell @click="cc" title="音乐闹钟" icon="tosend" />
-          <van-cell @click="cc" title="驾驶模式" icon="logistics" />
+          <van-cell @click="setTiming" title="定时停止播放" icon="underway-o" />
+          <van-cell title="扫一扫" icon="scan" />
+          <van-cell @click="musicClock" title="音乐闹钟" icon="tosend" />
+          <van-cell title="驾驶模式" icon="logistics" />
         </div>
       </div>
       <div class="popup-bot">
-        <van-cell @click="cc" title="夜间模式" icon="comment-o" />
-        <van-cell @click="cc" title="设置" icon="diamond-o" />
-        <van-cell @click="cc" title="退出" icon="shopping-cart-o" />
+        <van-cell @click="nightPatter" title="夜间模式" icon="star-o" />
+        <van-cell @click="setting" title="设置" icon="setting-o" />
+        <van-cell @click="close" title="退出" icon="close" />
       </div>
     </van-popup>
     <ul>
@@ -59,8 +59,36 @@ export default {
   },
 
   methods: {
+    // 点击主页面顶部最左边控制弹出层
     showPopup() {
       this.show = true;
+    },
+    // 去我的消息模块
+    goMyInfo() {
+      this.$router.push("/info");
+    },
+
+    goShop() {
+      console.log("goMember");
+    },
+
+    changeSkin() {
+      console.log("changeSkin");
+    },
+    setTiming() {
+      console.log("setTiming");
+    },
+    musicClock() {
+      console.log("musicClock");
+    },
+    nightPatter() {
+      console.log("nightPatter");
+    },
+    setting() {
+      console.log("setting");
+    },
+    close() {
+      console.log("close");
     },
   },
   //监听属性 类似于data概念
@@ -87,7 +115,7 @@ export default {
   top: 0;
   left: 0;
   height: 40px;
-  background-color: #eee;
+  background-color: #d33a31;
 }
 .footer .right {
   width: 10%;
@@ -116,7 +144,7 @@ export default {
   text-align: center;
 }
 .active {
-  background: orange;
+  background-color: #d33a31;
   color: #fff;
 }
 
@@ -138,5 +166,21 @@ export default {
   margin-top: 10px;
   height: 30px;
   line-height: 10px;
+}
+.popup-list .van-cell {
+  height: 40px;
+}
+.popup-list .van-cell span {
+  font-weight: 600;
+}
+
+.popup-bot {
+  position: fixed;
+  bottom: 0;
+}
+.popup-bot .van-cell {
+  width: 33%;
+  height: 40px;
+  float: left;
 }
 </style>
