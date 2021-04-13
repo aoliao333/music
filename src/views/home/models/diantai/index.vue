@@ -1,5 +1,5 @@
 <template>
-  <div class="day">每日推荐</div>
+  <div class="diantai">电台</div>
 </template>
 
 <script>

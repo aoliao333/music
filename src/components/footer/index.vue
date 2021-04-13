@@ -10,39 +10,39 @@
       </div>
       <div class="popup-list">
         <div class="popup-list_top">
-          <van-cell @click="cc" title="我的消息" icon="comment-o" />
-          <van-cell @click="cc" title="会员中心" icon="diamond-o" />
-          <van-cell @click="cc" title="商城" icon="shopping-cart-o" />
-          <van-cell @click="cc" title="在线听歌免流量" icon="coupon-o" />
+          <van-cell title="我的消息" icon="comment-o" />
+          <van-cell title="会员中心" icon="diamond-o" />
+          <van-cell title="商城" icon="shopping-cart-o" />
+          <van-cell title="在线听歌免流量" icon="coupon-o" />
         </div>
         <div class="popup-list_mid">
-          <van-cell @click="cc" title="我的好友" icon="manager-o" />
-          <van-cell @click="cc" title="附近的人" icon="location-o" />
+          <van-cell title="我的好友" icon="manager-o" />
+          <van-cell title="附近的人" icon="location-o" />
         </div>
         <div class="popup-list_bot">
-          <van-cell @click="cc" title="个性换肤" icon="award-o" />
+          <van-cell title="个性换肤" icon="award-o" />
           <van-cell title="听歌识曲" icon="service-o" />
-          <van-cell @click="cc" title="定时停止播放" icon="underway-o" />
-          <van-cell @click="cc" title="扫一扫" icon="scan" />
-          <van-cell @click="cc" title="音乐闹钟" icon="tosend" />
-          <van-cell @click="cc" title="驾驶模式" icon="logistics" />
+          <van-cell title="定时停止播放" icon="underway-o" />
+          <van-cell title="扫一扫" icon="scan" />
+          <van-cell title="音乐闹钟" icon="tosend" />
+          <van-cell title="驾驶模式" icon="logistics" />
         </div>
       </div>
       <div class="popup-bot">
-        <van-cell @click="cc" title="夜间模式" icon="comment-o" />
-        <van-cell @click="cc" title="设置" icon="diamond-o" />
-        <van-cell @click="cc" title="退出" icon="shopping-cart-o" />
+        <van-cell title="夜间模式" icon="comment-o" />
+        <van-cell title="设置" icon="diamond-o" />
+        <van-cell title="退出" icon="shopping-cart-o" />
       </div>
     </van-popup>
     <ul>
       <router-link to="/fenlei" tag="li"
-        ><span><van-icon name="music-o"/></span
+        ><span><van-icon name="music-o" /></span
       ></router-link>
       <router-link to="/home" tag="li">
-        <span> <van-icon name="service-o"/></span>
+        <span> <van-icon name="service-o" /></span>
       </router-link>
       <router-link to="/cart" tag="li"
-        ><span><van-icon name="friends-o"/></span
+        ><span><van-icon name="friends-o" /></span
       ></router-link>
     </ul>
     <div class="right"><van-icon name="search" /></div>

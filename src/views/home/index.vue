@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <Header> </Header>
-    <router-view></router-view>
+    <Header></Header>
+    <div class="nav">
+      <van-tabs v-model="activeName">
+        <van-tab title="音乐" name="a"><Music></Music></van-tab>
+        <van-tab title="视频" name="b"><Video></Video></van-tab>
+        <van-tab title="电台" name="c"><Diantai></Diantai></van-tab>
+      </van-tabs>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "../../components/header";
+import Music from "./models/music";
+import Diantai from "./models/diantai";
+import Video from "./models/video";
 export default {
   components: {
     Header,
+    Music,
+    Diantai,
+    Video,
   },
   data() {
-    return {};
+    return {
+      activeName: "a",
+    };
   },
   computed: {},
   watch: {},

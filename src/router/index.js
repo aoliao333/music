@@ -7,6 +7,7 @@ import VueRouter from "vue-router";
 
 //例如home的子路由
 import homechild from "../router/models/homechildren";
+
 Vue.use(VueRouter);
 
 
@@ -30,6 +31,46 @@ const router = new VueRouter({
       //home 子路由引入方法
       redirect: "/home/music",
       children: homechild,
+    },
+    { //私人fm
+      path: "/fm",
+      name: "Fm",
+      component: () => import("../views/home/models/music/four/fm"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
+
+    },
+    { //每日推荐
+      path: "/day",
+      name: "Day",
+      component: () => import("../views/home/models/music/four/day"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
+
+    },
+    { //歌单
+      path: "/musiclist",
+      name: "Musiclist",
+      component: () => import("../views/home/models/music/four/musiclist"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
+
+    },
+    { //排行榜
+      path: "/paihangbang",
+      name: "Paihangbang",
+      component: () => import("../views/home/models/music/four/paihangbang"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
+
     },
     {
 

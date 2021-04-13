@@ -11,17 +11,17 @@ const homechild = [
       showTabbar: true, //   登录前不显示底部导航
     },
     //音乐页面子路由配置
-    children: [
-      {
-        path: "fm",
-        name: "Fm",
-        component: () => import("../../views/home/models/music/four/fm"), // 路由懒加载
-        meta: {
-          title: "音乐",
-          showTabbar: false, //   登录前不显示底部导航
-        },
-      },
-    ],
+    // children: [
+    //   {
+    //     path: "fm",
+    //     name: "Fm",
+    //     component: () => import("../../views/home/models/music/four/fm"), // 路由懒加载
+    //     meta: {
+    //       title: "音乐",
+    //       showTabbar: false, //   登录前不显示底部导航
+    //     },
+    //   },
+    // ],
   },
 ];
 export default homechild;
