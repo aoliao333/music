@@ -134,6 +134,65 @@ const router = new VueRouter({
         showTabbar: true, //   登录前不显示底部导航
       },
     },
+    {
+      path: "/login", //头部导航第三个  音乐动态
+      name: "Login",
+      component: () => import("../views/login/index.vue"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/reg", //头部导航第三个  音乐动态
+      name: "Reg",
+      component: () => import("../views/reg/index.vue"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/shop", //头部导航第三个  音乐动态
+      name: "Shop",
+      component: () => import("../views/popup/shop/index.vue"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+      redirect: "/shop/home",
+      children: [
+        {
+          path: "home",
+          name: "Home",
+          component: () => import("../views/popup/shop/home/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+        {
+          path: "fenlei",
+          name: "Fenlei",
+          component: () => import("../views/popup/shop/fenlei/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+        {
+          path: "cart",
+          name: "Cart",
+          component: () => import("../views/popup/shop/cart/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+        {
+          path: "mine",
+          name: "Mine",
+          component: () => import("../views/popup/shop/mine/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+      ],
+    },
   ],
   linkActiveClass: "active",
 });
