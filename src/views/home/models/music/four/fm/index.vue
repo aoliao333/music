@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// import { reqPersonalFM } from "../../../../../../api/four/fm";
 export default {
   components: {},
   data() {
@@ -13,9 +14,16 @@ export default {
   //监控data中的数据变化
   watch: {},
 
-  methods: {},
+  methods: {
+    // async fmlist() {
+    //   const res = await reqPersonalFM();
+    //   console.log(res);
+    // },
+  },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    // this.fmlist();
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {},
