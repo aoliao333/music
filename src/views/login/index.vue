@@ -80,4 +80,8 @@ export default {
   updated() {},
 };
 </script>
-<style scoped></style>
+<style scoped>
+.login{
+  margin-top: 50px;
+}
+</style>
