@@ -55,6 +55,7 @@ export default {
       // query传参可以和path结合使用，也可以和name结合使用,params传参只能和name配合,params传递参数的时候，参数丢失
       this.$router.push({
         name: `Detail`,
+        /*   path:`/detail/${id}`, */
         query: { id },
       });
     },

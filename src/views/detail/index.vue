@@ -7,7 +7,7 @@
         </template>
       </van-nav-bar>
     </div>
-    <aplayer :audio="audio" :lrcType="3" />
+    <aplayer :audio="audio" :lrcType="1" />
 
     <div class="footer">
       <ul>
@@ -19,16 +19,20 @@
 </template>
 
 <script>
+import { reqSongDetail } from "../../api/user";
+import { reqLyric } from "../../api/user";
+import { reqSongsUrl } from "../../api/user";
 export default {
   components: {},
   data() {
     return {
+      id: "",
       audio: {
-        name: "东西（Cover：林俊呈）",
-        artist: "纳豆",
-        url: "https://cdn.moefe.org/music/mp3/thing.mp3",
-        cover: 'https://p1.music.126.net/5zs7IvmLv7KahY3BFzUmrg==/109951163635241613.jpg?param=300y300', // prettier-ignore
-        lrc: "https://cdn.moefe.org/music/lrc/thing.lrc",
+        name: "",
+        artist: "",
+        url: "",
+        cover: '', // prettier-ignore
+        lrc: "",
       },
     };
   },
@@ -41,11 +45,45 @@ export default {
     onClickLeft() {
       this.$router.push("/");
     },
+    // 获取歌手详情
+    async artDetail(id) {
+      let str = `?ids=${id}`;
+      console.log(str);
+      const res = await reqSongDetail(str);
+      console.log(res);
+      // 歌名
+      this.audio.name = res.data.songs[0].name;
+      // 歌手名
+      this.audio.artist = res.data.songs[0].al.name;
+      // 图片
+      this.audio.cover = res.data.songs[0].al.picUrl;
+    },
+    // 获取歌词
+    async getLyric(id) {
+      let str = `?id=${id}`;
+      console.log(str);
+      const res = await reqLyric(str);
+      console.log(res);
+      this.audio.lrc = res.data.lrc.lyric;
+    },
+    // 获取歌曲url
+    async getSongurl(id) {
+      let str = `?id=${id}`;
+      console.log(str);
+      const res = await reqSongsUrl(str);
+      console.log(res);
+      this.audio.url = res.data.data[0].url;
+    },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     const id = this.$route.query.id;
     console.log(id);
+    this.id = id;
+
+    this.artDetail(id);
+    this.getLyric(id);
+    this.getSongurl(id);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
