@@ -5,37 +5,36 @@
         <div class="topright fl">        
         <p>歌手分类</p></div>
          </div>
-    <div>
+    <div class="bottom">
         <ul>
-            <a href="#"><li>华语男歌手</li></a>
-            <a href="#"><li>华语女歌手</li></a>
-            <a href="#"><li>华语乐队/组合</li></a>
-        </ul>
-        <ul>
-            <a href="#"><li>欧美男歌手</li></a>
-            <a href="#"><li>欧美女歌手</li></a>
-            <a href="#"><li>欧美乐队/组合</li></a>
+            <a href="#/singerresult?type=1&area=7&title=华语男歌手"><li>华语男歌手</li></a>
+            <a href="#/singerresult?type=2&area=7&title=华语女歌手"><li>华语女歌手</li></a>
+            <a href="#/singerresult?type=3&area=7&title=华语乐队/组合"><li>华语乐队/组合</li></a>
         </ul>
         <ul>
-            <a href="#"><li>日本男歌手</li></a>
-            <a href="#"><li>日本女歌手</li></a>
-            <a href="#"><li>日本乐队/组合</li></a>
+            <a href="#/singerresult?type=1&area=96&title=欧美男歌手"><li>欧美男歌手</li></a>
+            <a href="#/singerresult?type=2&area=96&title=欧美女歌手"><li>欧美女歌手</li></a>
+            <a href="#/singerresult?type=3&area=96&title=欧美乐队/组合"><li>欧美乐队/组合</li></a>
         </ul>
-                <ul>
-            <a href="#"><li>韩国男歌手</li></a>
-            <a href="#"><li>韩国女歌手</li></a>
-            <a href="#"><li>韩国乐队/组合</li></a>
+        <ul>
+            <a href="#/singerresult?type=1&area=8&title=日本男歌手"><li>日本男歌手</li></a>
+            <a href="#/singerresult?type=2&area=8&title=日本女歌手"><li>日本女歌手</li></a>
+            <a href="#/singerresult?type=3&area=8&title=日本乐队/组合"><li>日本乐队/组合</li></a>
         </ul>
-                <ul>
-            <a href="#"><li>其他男歌手</li></a>
-            <a href="#"><li>其他女歌手</li></a>
-            <a href="#"><li>其他乐队/组合</li></a>
+        <ul>
+            <a href="#/singerresult?type=1&area=16&title=韩国男歌手"><li>韩国男歌手</li></a>
+            <a href="#/singerresult?type=2&area=16&title=韩国女歌手"><li>韩国女歌手</li></a>
+            <a href="#/singerresult?type=3&area=16&title=韩国乐队/组合"><li>韩国乐队/组合</li></a>
+        </ul>
+        <ul>
+            <a href="#/singerresult?type=1&area=0&title=其他男歌手"><li>其他男歌手</li></a>
+            <a href="#/singerresult?type=2&area=0&title=其他女歌手"><li>其他女歌手</li></a>
+            <a href="#/singerresult?type=3&area=0&title=其他乐队/组合"><li>其他乐队/组合</li></a>
         </ul>
     </div>
 </div>
 </template>
 <script>
-// import {reqhotlist} from "../../api/hotsearch"
 export default {
 components: {},
 data() {
@@ -61,6 +60,9 @@ beforeDestroy() {}, //生命周期 - 销毁之前
 }
 </script>
 <style scoped>
+.bottom{
+    margin-top: 70px;
+}
 ul{
     background-color: white;
     margin-top: 12px;
@@ -75,7 +77,6 @@ ul li{
     border-bottom: 1px solid rgb(221, 219, 219);
 }
 li a{
-    /* background-color: white; */
     color: black;
 }
 .search{
@@ -95,6 +96,9 @@ li a{
     color: white;
 }
 .top{
+    width: 100%;
+    position: fixed;
+    top: 0;
     height: 70px;
     background-color: #D33A31;
 }

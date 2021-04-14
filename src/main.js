@@ -9,7 +9,9 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import { Lazyload } from "vant";
 
+import { Popup } from 'vant';
 
+Vue.use(Popup);
 Vue.use(Lazyload);
 Vue.config.productionTip = false;
 Vue.use(Lazyload);

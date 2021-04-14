@@ -17,6 +17,9 @@
             <li v-for="(m,n) in singlist" :key="n" >
                 <div class="right"><p>{{m.name}}</p><span>{{m.ar[0].name}}&nbsp;-&nbsp;{{m.al.name}}</span>
                 </div>
+                <div class="sandian fr">
+                    <van-icon name="ellipsis" />
+                </div>
             </li>
         </ul>
   </van-tab>
@@ -104,11 +107,13 @@ methods: {
      submit(){
     this.$router.push({path:'/result',query:{keywords:this.val,type:this.type}});
     let lishi=JSON.parse(localStorage.getItem('lishi'));
-        if (lishi!='') {
+    console.log(lishi);
+        if (lishi!=null) {
             lishi.unshift(this.val)
             this.lishilist=lishi
             localStorage.setItem('lishi',JSON.stringify(lishi)) 
         }else{
+            console.log(1);
             lishi=[this.val]
             this.lishilist=lishi
             localStorage.setItem('lishi',JSON.stringify(lishi))
@@ -125,6 +130,7 @@ methods: {
     async initsinglist(val,type,limit){
         const result= await reqsinglist(val,type,limit);
         this.singlist=result.data.result.songs
+        // console.log(this.singlist);
     },
     //歌手
     async initsingerlist(val,type,limit){
@@ -198,7 +204,11 @@ beforeDestroy() {}, //生命周期 - 销毁之前
 }
 </script>
 <style scoped>
-
+.sandian{
+    height: 60px;
+    line-height: 60px;
+    margin-right: 20px;
+}
 .user img{
     border-radius: 30px;
 }
