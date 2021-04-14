@@ -6,16 +6,32 @@
       /></van-swipe-item>
     </van-swipe>
 
-    <van-tabbar v-model="active" :fixed="false">
-      <van-tabbar-item icon="home-o" @click="gofm">私人FM</van-tabbar-item>
-      <van-tabbar-item icon="search" @click="goday">每日推荐</van-tabbar-item>
-      <van-tabbar-item icon="friends-o" @click="gomusiclist"
-        >歌单</van-tabbar-item
-      >
-      <van-tabbar-item icon="setting-o" @click="gopaihangbang"
-        >排行榜</van-tabbar-item
-      >
-    </van-tabbar>
+    <van-grid v-model="active" :fixed="false" class="fourlist">
+      <div class="four" @click="gofm">
+        <div class="circle">
+          <van-icon color="pink" size="30" name="goods-collect-o"></van-icon>
+        </div>
+        <p>私人FM</p>
+      </div>
+      <div class="four" @click="goday">
+        <div class="circle">
+          <van-icon color="pink" size="30" name="calendar-o"></van-icon>
+        </div>
+        <p>每日推荐</p>
+      </div>
+      <div class="four" @click="gomusiclist">
+        <div class="circle">
+          <van-icon color="pink" size="30" name="service-o"></van-icon>
+        </div>
+        <p>歌单</p>
+      </div>
+      <div class="four" @click="gopaihangbang">
+        <div class="circle">
+          <van-icon color="pink" size="30" name="bar-chart-o"></van-icon>
+        </div>
+        <p>排行榜</p>
+      </div>
+    </van-grid>
     <!-- 推荐歌单 -->
     <div class="list">
       <router-link class="tuijian" to="/">
@@ -133,9 +149,9 @@ export default {
     //获取轮播图
     async swipe() {
       const res = await reqSwipe({ type: 2 });
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
-        console.log(res.data.banners);
+        // console.log(res.data.banners);
         this.swipelist = res.data.banners;
       }
     },
@@ -145,7 +161,7 @@ export default {
       // console.log(res.data.result);
       if (res.status === 200) {
         this.list1 = res.data.result;
-        console.log(this.list1);
+        // console.log(this.list1);
       }
     },
     //独家放送
@@ -154,7 +170,7 @@ export default {
       // console.log(res.data.result);
       if (res.status === 200) {
         this.list2 = res.data.result;
-        console.log(this.list2);
+        // console.log(this.list2);
       }
     },
     //最新音乐
@@ -163,7 +179,7 @@ export default {
       // console.log(res.data.result);
       if (res.status === 200) {
         this.list3 = res.data.result;
-        console.log(this.list3);
+        // console.log(this.list3);
       }
     },
     //推荐MV
@@ -172,7 +188,7 @@ export default {
       // console.log(res.data.result);
       if (res.status === 200) {
         this.list4 = res.data.result;
-        console.log(this.list4);
+        // console.log(this.list4);
       }
     },
     // reqDjprogram 推荐电台
@@ -181,7 +197,7 @@ export default {
       // console.log(res.data.result);
       if (res.status === 200) {
         this.list5 = res.data.result;
-        console.log(this.list5);
+        // console.log(this.list5);
       }
     },
   },
@@ -203,6 +219,23 @@ export default {
 };
 </script>
 <style scoped>
+.fourlist {
+  height: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+.circle {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+.four p {
+  font-size: 12px;
+}
 .music {
   width: 100%;
 }

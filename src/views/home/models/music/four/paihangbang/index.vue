@@ -88,14 +88,14 @@ export default {
     },
 
     async getlist() {
-      console.log(1);
+      // console.log(1);
       const res = await reqToplist();
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         this.top = res.data.list;
         this.geshou = res.data.artistToplist;
         this.zhanshang = res.data.rewardToplist;
-        console.log(this.zhanshang);
+        // console.log(this.zhanshang);
       }
     },
   },

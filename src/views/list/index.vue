@@ -39,8 +39,8 @@ export default {
   components: {},
   data() {
     return {
+      id1: 0,
       id: 0,
-
       coverImgUrl: "",
       list: [],
       loading: false,
@@ -56,23 +56,26 @@ export default {
     gopaihangbang() {
       this.$router.replace("/paihangbang");
     },
-    async getlist(id) {
-      const res = await reqPhblist({ id: id });
-      console.log(res);
+    async getlist(id1) {
+      const res = await reqPhblist({ id: id1 });
+      // console.log(res);
       if (res.status === 200) {
-        console.log(res.data.playlist.tracks[0]);
+        // console.log(res.data.playlist.tracks[0]);
         this.coverImgUrl = res.data.playlist.coverImgUrl;
         this.list = res.data.playlist.tracks;
       }
     },
-    godetial(id1) {
-      this.$router.replace(`/detail?=${id1}`);
+    godetial(id) {
+      this.$router.push({
+        name: `Detail`,
+        query: { id },
+      });
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     this.id = this.$route.params.id;
-    console.log(this.id);
+    // console.log(this.id);
     this.getlist(this.id);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
