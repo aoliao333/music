@@ -247,6 +247,15 @@ const router = new VueRouter({
         showTabbar: false, //   登录前不显示底部导航
       },
     },
+
+    {
+      path: "/singerresult", // 搜索结果
+      name: "Singerresult",
+      component: () => import("../views/search/singerresult"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
   ],
   linkActiveClass: "active",
 });
