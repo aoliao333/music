@@ -27,13 +27,15 @@
    <van-collapse v-model="activeNames" class="gedan">
   <van-collapse-item title="创建的歌单" name="1">
     <van-button type="primary" size="large" @click="chuangjiangedan"><van-icon name="plus" />创建新歌单</van-button>
-     <div class="gedan-list">
+     
+         <!-- <div class="gedan-list"  > -->
+            <div class="gedan-list"  v-for="(item,index) in playlists" :key="index">
            <van-image
               width="75"
               height="75"
-              src="https://img01.yzcdn.cn/vant/cat.jpeg"
+              :src="item.coverImgUrl"
             />
-            <dl class="gedan-list-right"><dd>我喜欢的音乐</dd><dt>0首</dt></dl>
+            <dl class="gedan-list-right"><dd>{{item.name}}</dd><dt>0首</dt></dl>
             <van-button  type="default" is-link @click="showPopup"><van-icon class="gedanicon" name="ellipsis" />
           </van-button>
             <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
@@ -51,6 +53,7 @@
 </van-popup>
         </div>
   </van-collapse-item>
+  
   </van-collapse>
   <div class="tuijian">
     <h3>推荐歌单</h3>
@@ -70,7 +73,7 @@
   height="10rem"
   fit="contain"
   :src="obj.result[3].picUrl"
-/> <p>{{obj.result[3].name}}</p></van-col>
+/> <p >{{obj.result[3].name}}</p></van-col>
 </van-row>
   </div>
   </div>
@@ -78,10 +81,11 @@
 
 <script>
 import Header from "../../components/header";
-// import {isLogined} from '../../utils/util'
+import {isLogined} from '../../utils/util'
 import { Dialog } from 'vant';
 import {tuijianDedan} from '../../api/four/bendi'
 import {yonghuGedan} from '../../api/four/bendi'
+import {xinjiangedan} from '../../api/four/bendi'
 
 export default {
   components: {
@@ -94,8 +98,10 @@ export default {
       activeNames: ['1'],
        show: false,
        obj:null,
-       
+       playlists:null,
       // message:
+       gedanname:'',
+       aaa:null,
     };
   },
   //监听属性 类似于data概念
@@ -104,6 +110,7 @@ export default {
   watch: {},
 
   methods: {
+    
     async  getTuijiangedan(){
     const result=await tuijianDedan();
     if(result.status===200){
@@ -112,22 +119,29 @@ export default {
     }
   },
   async getWodegedan(id){
-   
+   if(isLogined()){
     const result=await yonghuGedan(id);
-  console.log(result);
+  console.log(result.data.playlist)
+     this.playlists=result.data.playlist;
+     console.log(this.playlists);
+   }
 
   },
     showPopup() {
       this.show = true;
     },
-    chuangjiangedan(){
+chuangjiangedan(){
       console.log(111111111);
       Dialog.confirm({
-  title: '新建歌单',
-  message: '<input type="text"  placeholder="请输入歌单标题">',
+      title: '新建歌单',
+      message: '<input type="text" v-model="gedanname"   placeholder="请输入歌单标题">',
+      
 })
   .then(() => {
-    // on confirm
+    this.aaa=this.gedanname;
+    console.log(this.aaa);
+       this.xinjiangedanaaa(this.gedanname)
+    
   })
   .catch(() => {
     // on cancel
@@ -139,6 +153,22 @@ export default {
    toWodeshoucang(){
      this.$router.push({ path:'/wodeshoucang'})
 
+   },
+   createXinjian(){
+     console.log(11111111111111111111111111);
+   },
+   
+ async  xinjiangedanaaa(name){
+   if(this.gedanname===''){
+     console.log(3333);
+   }else{
+ if(isLogined()){
+      const result =await xinjiangedan(name);
+      console.log(5555,result);
+    }
+   }
+    //  console.log(aaaa);
+   
    }
   },
  
@@ -146,7 +176,8 @@ export default {
   created() {
 
     this.getTuijiangedan();
-    this.getWodegedan(35045027);
+    this.getWodegedan(339146651);
+    
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
@@ -202,11 +233,14 @@ export default {
   display: flex;
 }
 .gedan-list-right{
-  height: 100px;
-  width: 50%;
+  height: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
-  line-height: 35px;
+  /* line-height: 35px; */
+}
+.gedan-list-right dd{
+  height: 30px;
 }
 .van-button--normal{
   height: 100%;

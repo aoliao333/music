@@ -19,7 +19,18 @@ const router = new VueRouter({
       path: "/",
       redirect: "/home",
     },
-
+    {
+      //头部导航第二个 首页
+      path: "/login",
+      name: "Login",
+      component: () => import("../views/login/index.vue"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: true, //   登录前不显示底部导航
+      },
+      //home 子路由引入方法
+      
+    },
     {
       //头部导航第二个 首页
       path: "/home",

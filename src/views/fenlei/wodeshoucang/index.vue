@@ -1,5 +1,5 @@
 <template>
-   <div class='wodeshoucang'>
+   <div class='wodeshoucang' v-if="isRouterAlive">
           
       <div class="header">
           <span class="header-left"  > <van-icon @click="toFenlei" name="arrow-left"/></span>         
@@ -7,28 +7,33 @@
           <span class="header-right"><van-icon  name="ellipsis"/></span>
          
       </div>
-    <van-tabs v-model="activeName">
+    <van-tabs >
         <van-tab title="专辑" name="a">
-            <div class="zanwu">暂无内容</div>
+            <div class="zanwu">
+                <div class="shuzizhuanji" v-for="(item,index) in songs1.hotAlbums.slice(0,5)" :key="index">
+                    <img :src="item.picUrl" alt="" width="75" height="75" >
+                    <!-- <van-image
+                            width="75"
+                            height="75"
+                            lazy-load
+                            :src="item.picUrl"
+                            /> -->
+                    <dl>
+                        <dt>{{item.name}}</dt>
+                        <dd>{{item.artist.name}}</dd>
+                    </dl>
+                </div>
+            </div>
             <div class="tuijian">
                 <p>最新专辑推荐</p>
-                <van-row gutter="20">
-                <van-col span="8"><van-image
+                <van-row gutter="20" >
+                <van-col span="8" v-for="(item1,index) in songs.hotAlbums.slice(0,3)" :key='index'><van-image
                 height="10rem"
                 fit="contain"
-                :src="songs.hotAlbums[0].picUrl"
-                /> <p>{{songs.hotAlbums[0].name}} </p>
+                :src="item1.picUrl"
+                /> <p>{{item1.name}} </p>
                 </van-col>
-                <van-col span="8"><van-image
-                height="10rem"
-                fit="contain"
-                :src="songs.hotAlbums[1].picUrl"
-                /> <p>{{songs.hotAlbums[1].name}}</p></van-col>
-                <van-col span="8"><van-image
-                height="10rem"
-                fit="contain"
-                :src="songs.hotAlbums[2].picUrl"
-                /> <p>{{songs.hotAlbums[2].name}}</p></van-col>
+               
                 </van-row>
             </div>
         </van-tab>
@@ -48,19 +53,36 @@
 
 <script>
 import {tuijianZhuanji} from '../../../api/four/bendi'
+import {shoucanggeshoulist} from '../../../api/four/bendi'
+
 export default {
-    
+    // inject:['reload'],
     components: {},
+    provide() {
+      return {
+        reload: this.reload
+      }
+    },
     data() {
         
         return {
-           songs:null 
+           songs:null ,
+           songs1:null,
+           songsss:null,
+           tuijiansongs:null,
+           isRouterAlive: true
         };
     },
     computed: {},
     watch: {},
     
     methods: {
+         reload() {
+        this.isRouterAlive = false
+        this.$nextTick(function () {
+          this.isRouterAlive = true;
+        })
+      },
          toFenlei(){
      this.$router.push({ path:'/fenlei'})
         },
@@ -71,12 +93,32 @@ export default {
             if (result.status==200) {
                 console.log(result.data);
                 this.songs=result.data;
-                console.log(this.songs.hotAlbums[0].picUrl);
+            //   this.reload();
+               
             }
-        }  
+        },
+        
+    async  wodezhuanji(id){
+              const result=await tuijianZhuanji(id);
+            console.log(result);
+            // console.log(result.status);
+            if (result.status==200) {
+                console.log(result.data);
+                this.songs1=result.data;
+            //   this.reload();  
+            }    
+        },
+   async  geshouliebiao(id){
+        console.log(33333);
+        const result=await shoucanggeshoulist(id);
+        console.log(result);
+    }
     },
+
     created() {
         this.getZhuanji(6472);
+        this.wodezhuanji(12871618);
+        this.geshouliebiao(339146651)
     },
     mounted() {
         
@@ -120,5 +162,18 @@ export default {
     }
 .tuijian p{
     font-size: 18px;
+}
+.shuzizhuanji{
+    width: 100%;
+    height: 80px;
+    background-color: #d0d2d3;
+    display: flex;  
+}
+.shuzizhuanji dl{
+    margin-left: 10px;
+    line-height: 30px;
+}
+.shuzizhuanji dl dt{
+    font-weight: 800;
 }
 </style>
