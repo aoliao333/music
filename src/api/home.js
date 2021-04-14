@@ -13,4 +13,6 @@ export const reqPrivatecontent = (data) => get("/personalized/privatecontent/lis
 export const reqMv = (data) => get("/personalized/mv", data);
 //主播电台
 export const reqDjprogram = (data) => get("/personalized/djprogram", data);
+// 精品歌单
+export const reqMusicList = (data) => get("/top/playlist", data);
 
