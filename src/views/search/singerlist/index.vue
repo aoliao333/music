@@ -7,29 +7,29 @@
          </div>
     <div>
         <ul>
-            <a href=""><li>华语男歌手</li></a>
-            <a href=""><li>华语女歌手</li></a>
-            <a href=""><li>华语乐队/组合</li></a>
+            <a href="#"><li>华语男歌手</li></a>
+            <a href="#"><li>华语女歌手</li></a>
+            <a href="#"><li>华语乐队/组合</li></a>
         </ul>
         <ul>
-            <a href=""><li>华语男歌手</li></a>
-            <a href=""><li>华语女歌手</li></a>
-            <a href=""><li>华语乐队/组合</li></a>
+            <a href="#"><li>欧美男歌手</li></a>
+            <a href="#"><li>欧美女歌手</li></a>
+            <a href="#"><li>欧美乐队/组合</li></a>
         </ul>
         <ul>
-            <a href=""><li>华语男歌手</li></a>
-            <a href=""><li>华语女歌手</li></a>
-            <a href=""><li>华语乐队/组合</li></a>
+            <a href="#"><li>日本男歌手</li></a>
+            <a href="#"><li>日本女歌手</li></a>
+            <a href="#"><li>日本乐队/组合</li></a>
         </ul>
                 <ul>
-            <a href=""><li>华语男歌手</li></a>
-            <a href=""><li>华语女歌手</li></a>
-            <a href=""><li>华语乐队/组合</li></a>
+            <a href="#"><li>韩国男歌手</li></a>
+            <a href="#"><li>韩国女歌手</li></a>
+            <a href="#"><li>韩国乐队/组合</li></a>
         </ul>
                 <ul>
-            <a href=""><li>华语男歌手</li></a>
-            <a href=""><li>华语女歌手</li></a>
-            <a href=""><li>华语乐队/组合</li></a>
+            <a href="#"><li>其他男歌手</li></a>
+            <a href="#"><li>其他女歌手</li></a>
+            <a href="#"><li>其他乐队/组合</li></a>
         </ul>
     </div>
 </div>
