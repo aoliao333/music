@@ -158,11 +158,9 @@ const router = new VueRouter({
       },
     },
     {
-
       path: "/login", //头部导航第三个  音乐动态
       name: "Login",
       component: () => import("../views/login/index.vue"), // 路由懒加载
-
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },
@@ -227,6 +225,31 @@ const router = new VueRouter({
         showTabbar: false, //   登录前不显示底部导航
       },
     },
+    {
+      path: "/search",  //搜索
+      name: "Search",
+      component: () => import("../views/search"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/singerlist", // 歌手分类
+      name: "Singerlist",
+      component: () => import("../views/search/singerlist"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/result", // 搜索结果
+      name: "result",
+      component: () => import("../views/search/result"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+  }
+
   ],
   linkActiveClass: "active",
 });
