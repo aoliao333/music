@@ -1,5 +1,5 @@
 <template>
-  <div class="day">每日推荐</div>
+  <div class="info"></div>
 </template>
 
 <script>
@@ -24,5 +24,4 @@ export default {
   updated() {},
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>
