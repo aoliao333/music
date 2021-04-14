@@ -20,7 +20,7 @@
       </van-cell>
       <ul>
         <li v-for="item in songList" :key="item.id">
-          <van-cell :title="item.name" @click="godetail">
+          <van-cell :title="item.name" @click="godetail(item.id)">
             <!-- 使用 right-icon 插槽来自定义右侧图标 -->
             <template #right-icon>
               <van-icon name="points" class="points-icon" @click="showdetail" />
@@ -51,8 +51,13 @@ export default {
     // 点击出现具体信息
     showdetail() {},
     // 点击跳往播放页面
-    godetail() {
-      console.log(1);
+    godetail(id) {
+      // query传参可以和path结合使用，也可以和name结合使用,params传参只能和name配合,params传递参数的时候，参数丢失
+      this.$router.push({
+        name: `Detail`,
+        /*   path:`/detail/${id}`, */
+        query: { id },
+      });
     },
     // 返回按钮
     onClickLeft() {

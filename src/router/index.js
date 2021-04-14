@@ -8,6 +8,8 @@ import VueRouter from "vue-router";
 //例如home的子路由
 import homechild from "../router/models/homechildren";
 
+
+
 Vue.use(VueRouter);
 
 // 配置路由
@@ -18,7 +20,18 @@ const router = new VueRouter({
       path: "/",
       redirect: "/home",
     },
-
+    {
+      //头部导航第二个 首页
+      path: "/login",
+      name: "Login",
+      component: () => import("../views/login/index.vue"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: true, //   登录前不显示底部导航
+      },
+      //home 子路由引入方法
+      
+    },
     {
       //头部导航第二个 首页
       path: "/home",
@@ -87,6 +100,8 @@ const router = new VueRouter({
       meta: {
         showTabbar: true, //   登录前不显示底部导航
       },
+      // redirect: "/fenlei/",
+      // children: fenleichild,
     },
     {
       path: "/info",
@@ -205,10 +220,36 @@ const router = new VueRouter({
       path: "/list/:id",
       name: "List",
       component: () => import("../views/list"), // 路由懒加载
+
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },
     },
+    {
+      path: "/search",  //搜索
+      name: "Search",
+      component: () => import("../views/search"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/singerlist", // 歌手分类
+      name: "Singerlist",
+      component: () => import("../views/search/singerlist"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/result", // 搜索结果
+      name: "result",
+      component: () => import("../views/search/result"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+  }
+
   ],
   linkActiveClass: "active",
 });

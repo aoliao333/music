@@ -6,10 +6,13 @@ const instance = axios.create({
   baseURL: serverURL,
   timeout: 5000,
 
+
 });
 
 instance.interceptors.request.use(
+
   function (config) {
+
     // if (getToken()) {
     //   config.headers.authorization = "Bearer " + getToken();
     // }
