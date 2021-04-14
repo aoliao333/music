@@ -9,13 +9,9 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import { Lazyload } from "vant";
 
-<<<<<<< HEAD
 import APlayer from "@moefe/vue-aplayer";
 
-=======
-
 Vue.use(Lazyload);
->>>>>>> d7bab8a08ef8f5dbcd95698f1fed7e76c6fd2661
 Vue.config.productionTip = false;
 // 音乐播放
 Vue.use(APlayer, {
