@@ -6,7 +6,7 @@
       <div class="popop-top">
         <h6>登录网易云音乐</h6>
         <h6>320k高音质无线下载，手机电脑多端同步</h6>
-        <el-button round size="medium">立即登录</el-button>
+        <el-button round size="medium" @click="gologin">立即登录</el-button>
       </div>
       <div class="popup-list">
         <div class="popup-list_top">
@@ -62,6 +62,9 @@ export default {
   },
 
   methods: {
+    gologin() {
+      this.$router.push("/login");
+    },
     // 点击主页面顶部最左边控制弹出层
     showPopup() {
       this.show = true;
@@ -72,7 +75,7 @@ export default {
     },
 
     goShop() {
-      console.log("goMember");
+      this.$router.push("/shop");
     },
 
     changeSkin() {
