@@ -14,8 +14,11 @@
 <van-tabs v-model="active"  sticky  offset-top="70px">
   <van-tab title="单曲"  >
             <ul>
-            <li v-for="(m,n) in singlist" :key="n" >
+            <li v-for="(m,n) in singlist" :key="n"  @click="go(m.id)">
                 <div class="right"><p>{{m.name}}</p><span>{{m.ar[0].name}}&nbsp;-&nbsp;{{m.al.name}}</span>
+                </div>
+                <div class="sandian fr">
+                    <van-icon name="ellipsis" />
                 </div>
             </li>
         </ul>
@@ -38,7 +41,7 @@
   </van-tab>
   <van-tab title="歌单">
       <ul>
-        <li v-for="(m,n) in gedanlist" :key="n">
+        <li v-for="(m,n) in gedanlist" :key="n" >
                 <img :src="m.coverImgUrl" alt="">
                  <div class="right"><p>{{m.name}}</p><span>{{m.trackCount}}首&nbsp;by{{m.creator.nickname}}，播放{{(Number((m.playCount)/10000)).toFixed(1)}}万次</span></div>
         </li>
@@ -98,13 +101,17 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
+    go(id){
+        this.$router.push({path:'/detail?id='+id})
+    },
     del(){
         this.val=''
     },
      submit(){
     this.$router.push({path:'/result',query:{keywords:this.val,type:this.type}});
     let lishi=JSON.parse(localStorage.getItem('lishi'));
-        if (lishi!='') {
+    console.log(lishi);
+        if (lishi!=null) {
             lishi.unshift(this.val)
             this.lishilist=lishi
             localStorage.setItem('lishi',JSON.stringify(lishi)) 
@@ -198,7 +205,11 @@ beforeDestroy() {}, //生命周期 - 销毁之前
 }
 </script>
 <style scoped>
-
+.sandian{
+    height: 60px;
+    line-height: 60px;
+    margin-right: 20px;
+}
 .user img{
     border-radius: 30px;
 }

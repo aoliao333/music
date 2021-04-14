@@ -8,8 +8,6 @@ import VueRouter from "vue-router";
 //例如home的子路由
 import homechild from "../router/models/homechildren";
 
-
-
 Vue.use(VueRouter);
 
 // 配置路由
@@ -27,9 +25,11 @@ const router = new VueRouter({
       component: () => import("../views/login/index.vue"), // 路由懒加载
       meta: {
         title: "首页",
-        showTabbar: true, //   登录前不显示底部导航
+        showTabbar: false, //   登录前不显示底部导航
       },
       //home 子路由引入方法
+
+
 
     },
     {
@@ -157,14 +157,15 @@ const router = new VueRouter({
         showTabbar: true, //   登录前不显示底部导航
       },
     },
-    {
+
+    /*  {
       path: "/login", //头部导航第三个  音乐动态
       name: "Login",
       component: () => import("../views/login/index.vue"), // 路由懒加载
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },
-    },
+    }, */
     {
       path: "/reg", //头部导航第三个  音乐动态
       name: "Reg",
@@ -227,7 +228,7 @@ const router = new VueRouter({
     },
 
     {
-      path: "/search",  //搜索
+      path: "/search", //搜索
       name: "Search",
       component: () => import("../views/search"), // 路由懒加载
       meta: {
@@ -249,8 +250,20 @@ const router = new VueRouter({
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },
-    }
 
+    },
+
+
+
+
+    {
+      path: "/singerresult", // 搜索结果
+      name: "Singerresult",
+      component: () => import("../views/search/singerresult"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
   ],
   linkActiveClass: "active",
 });

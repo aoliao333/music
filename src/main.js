@@ -9,8 +9,12 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import { Lazyload } from "vant";
 
+
 import APlayer from "@moefe/vue-aplayer";
 
+import { Popup } from 'vant';
+
+Vue.use(Popup);
 Vue.use(Lazyload);
 Vue.config.productionTip = false;
 // 音乐播放

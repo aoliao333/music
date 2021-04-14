@@ -68,7 +68,7 @@ methods: {
     },
     sub(v){
         let lishi=JSON.parse(localStorage.getItem('lishi'));
-        if (lishi!='') {
+        if (lishi!=null) {
             lishi.unshift(v)
             this.lishilist=lishi
             localStorage.setItem('lishi',JSON.stringify(lishi)) 
@@ -81,11 +81,10 @@ methods: {
     submit(){
         this.$router.push({path:'/result',query:{keywords:this.val}});
         let lishi=JSON.parse(localStorage.getItem('lishi'));
-        if (lishi!='') {
+        if (lishi!=null) {
             lishi.unshift(this.val)
             this.lishilist=lishi
             localStorage.setItem('lishi',JSON.stringify(lishi)) 
-            console.log(lishi);
         }else{
             lishi=[this.val]
             this.lishilist=lishi

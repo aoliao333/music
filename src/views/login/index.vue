@@ -62,7 +62,7 @@ export default {
       if (result.data.code === 200) {
         setCookie("uid", result.data.account.id, 500000);
         Toast.success("登录成功");
-        this.$router.push("/");
+        this.$router.push("/home");
       } else if (result.code.status === 400) {
         Toast.success("账户不存在");
       } else {
@@ -81,7 +81,7 @@ export default {
 };
 </script>
 <style scoped>
-.login{
-  margin-top: 50px;
+.login {
+  margin-top: 0px;
 }
 </style>
