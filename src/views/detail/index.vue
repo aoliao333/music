@@ -182,10 +182,16 @@ export default {
 };
 </script>
 <style scoped>
+.top {
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
 .van-nav-bar {
   z-index: 100;
 }
 .lrc-list {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
