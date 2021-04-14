@@ -5,25 +5,28 @@ import { serverURL } from "./common";
 const instance = axios.create({
   baseURL: serverURL,
   timeout: 5000,
+
 });
 
 instance.interceptors.request.use(
-  function(config) {
+
+  function (config) {
+
     // if (getToken()) {
     //   config.headers.authorization = "Bearer " + getToken();
     // }
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
 
 instance.interceptors.response.use(
-  function(response) {
+  function (response) {
     return response;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );

@@ -7,7 +7,8 @@ import VueRouter from "vue-router";
 
 //例如home的子路由
 import homechild from "../router/models/homechildren";
-// import fenleichild from "../router/models/fenleichildren";
+
+
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,54 @@ const router = new VueRouter({
       //home 子路由引入方法
       redirect: "/home/music",
       children: homechild,
+    },
+    {
+      path: "/detail", //详情页面。
+      name: "Detail",
+      component: () => import("../views/detail"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      //私人fm
+      path: "/fm",
+      name: "Fm",
+      component: () => import("../views/home/models/music/four/fm"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      //每日推荐
+      path: "/day",
+      name: "Day",
+      component: () => import("../views/home/models/music/four/day"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      //歌单
+      path: "/musiclist",
+      name: "Musiclist",
+      component: () => import("../views/home/models/music/four/musiclist"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      //排行榜
+      path: "/paihangbang",
+      name: "Paihangbang",
+      component: () => import("../views/home/models/music/four/paihangbang"), // 路由懒加载
+      meta: {
+        title: "首页",
+        showTabbar: false, //   登录前不显示底部导航
+      },
     },
     {
       path: "/fenlei", //头部导航第一个 分类
@@ -110,18 +159,70 @@ const router = new VueRouter({
     },
     {
 
-      path: "/bendiyinyue",  //头部导航第三个  音乐动态
-      name: "Bendiyinyue",
-      component: () => import("../views/fenlei/bendiyinyue"), // 路由懒加载
+      path: "/login", //头部导航第三个  音乐动态
+      name: "Login",
+      component: () => import("../views/login/index.vue"), // 路由懒加载
+
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },
     },
     {
+      path: "/reg", //头部导航第三个  音乐动态
+      name: "Reg",
+      component: () => import("../views/reg/index.vue"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/shop", //头部导航第三个  音乐动态
+      name: "Shop",
+      component: () => import("../views/popup/shop/index.vue"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+      redirect: "/shop/home",
+      children: [
+        {
+          path: "home",
+          name: "Home",
+          component: () => import("../views/popup/shop/home/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+        {
+          path: "fenlei",
+          name: "Fenlei",
+          component: () => import("../views/popup/shop/fenlei/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+        {
+          path: "cart",
+          name: "Cart",
+          component: () => import("../views/popup/shop/cart/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+        {
+          path: "mine",
+          name: "Mine",
+          component: () => import("../views/popup/shop/mine/index.vue"), // 路由懒加载
+          meta: {
+            showTabbar: false, //   登录前不显示底部导航
+          },
+        },
+      ],
+    },
+    {
+      path: "/list/:id",
+      name: "List",
+      component: () => import("../views/list"), // 路由懒加载
 
-      path: "/wodeshoucang",  //头部导航第三个  音乐动态
-      name: "Wodeshoucang",
-      component: () => import("../views/fenlei/wodeshoucang"), // 路由懒加载
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },

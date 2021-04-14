@@ -60,10 +60,10 @@ export default {
       const result = await reqLogin(str);
       console.log(result);
       if (result.data.code === 200) {
-        setCookie("uid", result.data.account.id, 7);
+        setCookie("uid", result.data.account.id, 500000);
         Toast.success("登录成功");
         this.$router.push("/");
-      } else if (result.data.code === 400) {
+      } else if (result.code.status === 400) {
         Toast.success("账户不存在");
       } else {
         Toast.success("密码输入错误");

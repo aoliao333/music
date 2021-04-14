@@ -1,5 +1,5 @@
 <template>
-  <div class="header"></div>
+  <div class="video">视频</div>
 </template>
 
 <script>
@@ -24,4 +24,5 @@ export default {
   updated() {},
 };
 </script>
-<style scoped></style>
+<style scoped>
+</style>

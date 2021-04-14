@@ -3,16 +3,17 @@
     <div class="left" @click="showPopup"><van-icon name="orders-o" /></div>
     <!-- v-model控制弹出层 -->
     <van-popup v-model="show" position="left" :style="{ height: '100%' }">
-      <div class="popop-top">
+      <div class="popop-top" v-if="!uid">
         <h6>登录网易云音乐</h6>
         <h6>320k高音质无线下载，手机电脑多端同步</h6>
-        <el-button round size="medium">立即登录</el-button>
+        <el-button round size="medium" @click="gologin">立即登录</el-button>
       </div>
       <div class="popup-list">
         <div class="popup-list_top">
           <van-cell @click="goMyInfo" title="我的消息" icon="comment-o" />
           <van-cell title="会员中心" icon="diamond-o" />
           <van-cell @click="goShop" title="商城" icon="shopping-cart-o" />
+
           <van-cell title="在线听歌免流量" icon="coupon-o" />
         </div>
         <div class="popup-list_mid">
@@ -22,9 +23,11 @@
         <div class="popup-list_bot">
           <van-cell title="个性换肤" icon="award-o" />
           <van-cell title="听歌识曲" icon="service-o" />
+
           <van-cell @click="setTiming" title="定时停止播放" icon="underway-o" />
           <van-cell title="扫一扫" icon="scan" />
           <van-cell @click="musicClock" title="音乐闹钟" icon="tosend" />
+
           <van-cell title="驾驶模式" icon="logistics" />
         </div>
       </div>
@@ -50,15 +53,24 @@
 </template>
 
 <script>
+import { getCookie } from "../../utils/util";
+
 export default {
   components: {},
   data() {
     return {
       show: false,
+      uid: "",
     };
   },
 
   methods: {
+    get() {
+      this.uid = unescape(getCookie("uid"));
+    },
+    gologin() {
+      this.$router.push("/login");
+    },
     // 点击主页面顶部最左边控制弹出层
     showPopup() {
       this.show = true;
@@ -69,7 +81,7 @@ export default {
     },
 
     goShop() {
-      console.log("goMember");
+      this.$router.push("/shop");
     },
 
     changeSkin() {
@@ -89,6 +101,7 @@ export default {
     },
     close() {
       console.log("close");
+      this.$router.push("/detail");
     },
   },
   //监听属性 类似于data概念
@@ -97,7 +110,9 @@ export default {
   watch: {},
 
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    this.get();
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {},
@@ -166,6 +181,9 @@ export default {
   margin-top: 10px;
   height: 30px;
   line-height: 10px;
+}
+.popup-list {
+  width: 300px;
 }
 .popup-list .van-cell {
   height: 40px;
