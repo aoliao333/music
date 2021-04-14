@@ -48,13 +48,16 @@
         ><span><van-icon name="friends-o"/></span
       ></router-link>
     </ul>
-    <div class="right"><a href="#/search"><van-icon name="search" /></a></div>
+    <div class="right">
+      <a href="#/search"><van-icon name="search"/></a>
+    </div>
   </div>
 </template>
 
 <script>
 import { getCookie } from "../../utils/util";
-
+import { delCookie } from "../../utils/util";
+import { Toast } from "vant";
 export default {
   components: {},
   data() {
@@ -100,8 +103,12 @@ export default {
       console.log("setting");
     },
     close() {
-      console.log("close");
-      this.$router.push("/detail");
+      Toast.success("退出成功", 2000);
+      setTimeout(() => {
+        delCookie("uid");
+        this.$router.push("/home");
+        this.$router.go(0);
+      }, 2000);
     },
   },
   //监听属性 类似于data概念
