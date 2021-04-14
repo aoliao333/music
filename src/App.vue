@@ -7,7 +7,6 @@
 
 <script>
 import Footer from "./components/footer/index";
-
 export default {
   name: "App",
   components: {

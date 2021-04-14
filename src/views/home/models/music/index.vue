@@ -233,6 +233,7 @@ export default {
 .list {
   width: 100%;
 }
+
 .dujia {
   float: left;
   width: 185px;
