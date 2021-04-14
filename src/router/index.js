@@ -49,6 +49,39 @@ const router = new VueRouter({
         showTabbar: true, //   登录前不显示底部导航
       },
     },
-  ],
+    {
+      path: "/search",  //搜索
+      name: "Search",
+      component: () => import("../views/search"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/singerlist", // 歌手分类
+      name: "Singerlist",
+      component: () => import("../views/search/singerlist"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/result", // 搜索结果
+      name: "result",
+      component: () => import("../views/search/result"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+      // redirect: "/result/singerresult",
+    //   children:[
+    //   {
+    //    path: "/singerresult", // 搜索结果
+    //     name: "Singerresult",
+    //     component: () => import("../views/search/result/singerresult"),
+    //   },
+    // ],
+  }
+
+  ]
 });
 export default router;

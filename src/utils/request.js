@@ -1,17 +1,20 @@
 import axios from "axios";
 import { serverURL } from "./common";
-import { getToken } from "./util";
+// import { getToken } from "./util";
 
 const instance = axios.create({
   baseURL: serverURL,
   timeout: 5000,
+  // headers: {
+  //   "Content-Type": "application/x-www-form-urlencoded",
+  // },
 });
 
 instance.interceptors.request.use(
   function(config) {
-    if (getToken()) {
-      config.headers.authorization = "Bearer " + getToken();
-    }
+    // if (getToken()) {
+    //   config.headers.authorization = "Bearer " + getToken();
+    // }
     return config;
   },
   function(error) {

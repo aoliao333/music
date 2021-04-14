@@ -45,7 +45,7 @@
         ><span><van-icon name="friends-o"/></span
       ></router-link>
     </ul>
-    <div class="right"><van-icon name="search" /></div>
+    <div class="right"><a href="#/search"><van-icon name="search" /></a></div>
   </div>
 </template>
 
