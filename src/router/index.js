@@ -193,6 +193,14 @@ const router = new VueRouter({
         },
       ],
     },
+    {
+      path: "/list/:id",
+      name: "List",
+      component: () => import("../views/list"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
   ],
   linkActiveClass: "active",
 });

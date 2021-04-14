@@ -7,16 +7,12 @@
     </van-swipe>
 
     <van-tabbar v-model="active" :fixed="false">
-      <van-tabbar-item icon="home-o" to="/fm" @click="gofm"
-        >私人FM</van-tabbar-item
-      >
-      <van-tabbar-item icon="search" to="/day" @click="goday"
-        >每日推荐</van-tabbar-item
-      >
-      <van-tabbar-item icon="friends-o" to="/musiclist" @click="gomusiclist"
+      <van-tabbar-item icon="home-o" @click="gofm">私人FM</van-tabbar-item>
+      <van-tabbar-item icon="search" @click="goday">每日推荐</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" @click="gomusiclist"
         >歌单</van-tabbar-item
       >
-      <van-tabbar-item icon="setting-o" to="/paihangbang" @click="gopaihangbang"
+      <van-tabbar-item icon="setting-o" @click="gopaihangbang"
         >排行榜</van-tabbar-item
       >
     </van-tabbar>
