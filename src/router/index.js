@@ -32,7 +32,16 @@ const router = new VueRouter({
       redirect: "/home/music",
       children: homechild,
     },
-    { //私人fm
+    {
+      path: "/detail", //详情页面。
+      name: "Detail",
+      component: () => import("../views/detail"), // 路由懒加载
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      //私人fm
       path: "/fm",
       name: "Fm",
       component: () => import("../views/home/models/music/four/fm"), // 路由懒加载
@@ -40,9 +49,9 @@ const router = new VueRouter({
         title: "首页",
         showTabbar: false, //   登录前不显示底部导航
       },
-
     },
-    { //每日推荐
+    {
+      //每日推荐
       path: "/day",
       name: "Day",
       component: () => import("../views/home/models/music/four/day"), // 路由懒加载
@@ -50,9 +59,9 @@ const router = new VueRouter({
         title: "首页",
         showTabbar: false, //   登录前不显示底部导航
       },
-
     },
-    { //歌单
+    {
+      //歌单
       path: "/musiclist",
       name: "Musiclist",
       component: () => import("../views/home/models/music/four/musiclist"), // 路由懒加载
@@ -60,9 +69,9 @@ const router = new VueRouter({
         title: "首页",
         showTabbar: false, //   登录前不显示底部导航
       },
-
     },
-    { //排行榜
+    {
+      //排行榜
       path: "/paihangbang",
       name: "Paihangbang",
       component: () => import("../views/home/models/music/four/paihangbang"), // 路由懒加载
@@ -70,7 +79,6 @@ const router = new VueRouter({
         title: "首页",
         showTabbar: false, //   登录前不显示底部导航
       },
-
     },
     {
       path: "/fenlei", //头部导航第一个 分类

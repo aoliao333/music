@@ -3,7 +3,7 @@
     <div class="left" @click="showPopup"><van-icon name="orders-o" /></div>
     <!-- v-model控制弹出层 -->
     <van-popup v-model="show" position="left" :style="{ height: '100%' }">
-      <div class="popop-top">
+      <div class="popop-top" v-if="!uid">
         <h6>登录网易云音乐</h6>
         <h6>320k高音质无线下载，手机电脑多端同步</h6>
         <el-button round size="medium" @click="gologin">立即登录</el-button>
@@ -39,13 +39,13 @@
     </van-popup>
     <ul>
       <router-link to="/fenlei" tag="li"
-        ><span><van-icon name="music-o" /></span
+        ><span><van-icon name="music-o"/></span
       ></router-link>
       <router-link to="/home" tag="li">
-        <span> <van-icon name="service-o" /></span>
+        <span> <van-icon name="service-o"/></span>
       </router-link>
       <router-link to="/cart" tag="li"
-        ><span><van-icon name="friends-o" /></span
+        ><span><van-icon name="friends-o"/></span
       ></router-link>
     </ul>
     <div class="right"><van-icon name="search" /></div>
@@ -53,15 +53,21 @@
 </template>
 
 <script>
+import { getCookie } from "../../utils/util";
+
 export default {
   components: {},
   data() {
     return {
       show: false,
+      uid: "",
     };
   },
 
   methods: {
+    get() {
+      this.uid = unescape(getCookie("uid"));
+    },
     gologin() {
       this.$router.push("/login");
     },
@@ -95,6 +101,7 @@ export default {
     },
     close() {
       console.log("close");
+      this.$router.push("/detail");
     },
   },
   //监听属性 类似于data概念
@@ -103,7 +110,9 @@ export default {
   watch: {},
 
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    this.get();
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {},
@@ -172,6 +181,9 @@ export default {
   margin-top: 10px;
   height: 30px;
   line-height: 10px;
+}
+.popup-list {
+  width: 300px;
 }
 .popup-list .van-cell {
   height: 40px;
