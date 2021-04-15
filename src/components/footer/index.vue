@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="left" @click="showPopup"><van-icon name="orders-o" /></div>
+    <div class="left" @click="showPopup"><i class="el-icon-s-unfold"></i></div>
     <!-- v-model控制弹出层 -->
     <van-popup v-model="show" position="left" :style="{ height: '100%' }">
       <div class="popop-top" v-if="!uid">
@@ -136,7 +136,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  height: 40px;
+  height: 60px;
   background-color: #d33a31;
   overflow: hidden;
 }
@@ -151,26 +151,26 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .footer .left i {
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .footer .right {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .footer .right i {
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
 }
 .footer ul {
   display: flex;
   width: 80%;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 25%;
+  padding: 0 20%;
 }
 
 .footer ul li {
@@ -181,7 +181,7 @@ export default {
   margin-top: 5px;
 }
 .footer ul li span {
-  font-size: 20px;
+  font-size: 30px;
 }
 .active {
   background-color: #d33a31;

@@ -28,6 +28,6 @@ export default {
 </script>
 <style scoped>
 .cart {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 </style>

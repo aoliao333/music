@@ -1,45 +1,52 @@
 <template>
   <div class="day">
-    <van-nav-bar
-      style="background:#D33A31"
-      title="每日推荐"
-      @click-left="onClickLeft"
-      left-text="返回"
-      left-arrow
-    >
-    </van-nav-bar>
-    <div class="daily-top">
-      <p>根据你的音乐口味生成，每日6：00更新</p>
+    <div class="nav">
+      <i class="el-icon-back" @click="gohome"></i>
     </div>
-    <div class="list">
-      <van-cell title="播放全部" size="30" icon="play-circle-o">
+    <div>
+      <img :src="coverImgUrl" alt="" height="375" width="100%" />
+      <van-cell title="播放全部" size="30" icon="play-circle-o"
+        >{{ "共" + list.length + "首" }}
         <!-- 使用 right-icon 插槽来自定义右侧图标 -->
         <template #right-icon>
-          <van-icon size="20" name="label-o" />
+          <van-icon name="bars" size="25" />多选
         </template>
       </van-cell>
-      <ul>
-        <li v-for="item in songList" :key="item.id">
-          <van-cell :title="item.name" @click="godetail(item.id)">
-            <!-- 使用 right-icon 插槽来自定义右侧图标 -->
-            <template #right-icon>
-              <van-icon name="points" class="points-icon" @click="showdetail" />
-            </template>
-          </van-cell>
-        </li>
-      </ul>
+
+      <van-list finished-text="没有更多了" v-if="list">
+        <van-cell
+          @click="godetial(item.id)"
+          v-for="(item, index) in list"
+          :key="index"
+        >
+          <div class="a">
+            <h1 v-show="3">{{ index + 1 }}</h1>
+            <div class="b">
+              <h2>{{ item.name }}</h2>
+              <p>{{ item.song.artists[0].name }}-{{ item.name }}</p>
+            </div>
+            <van-icon class="icon" name="ellipsis" />
+          </div>
+        </van-cell>
+      </van-list>
     </div>
   </div>
 </template>
 
 <script>
 import { reqRecommend } from "../../../../../../api/home_a";
-/* import { Toast } from "vant"; */
 export default {
   components: {},
   data() {
     return {
-      songList: [],
+      id1: "",
+      id: "",
+      coverImgUrl:
+        "https://qpic.y.qq.com/music_cover/Z7haT1p6eeic63oTvdlNb71DFeHrwJU0uZNPV7P8w0a7mWOepFByN4A/300?n=1",
+      list: [],
+      loading: false,
+      finished: false,
+      name: "",
     };
   },
   //监听属性 类似于data概念
@@ -48,34 +55,31 @@ export default {
   watch: {},
 
   methods: {
-    // 点击出现具体信息
-    showdetail() {},
-    // 点击跳往播放页面
-    godetail(id) {
-      // query传参可以和path结合使用，也可以和name结合使用,params传参只能和name配合,params传递参数的时候，参数丢失
+    gohome() {
+      this.$router.replace("/home");
+    },
+    async getlist() {
+      const res = await reqRecommend({ limit: 66 });
+      console.log(res);
+
+      if (res.status === 200) {
+        // console.log(res.data.playlist.tracks[0]);
+        this.list = res.data.result;
+        console.log(this.list);
+      }
+    },
+    godetial(id) {
       this.$router.push({
         name: `Detail`,
-        /*   path:`/detail/${id}`, */
         query: { id },
       });
-    },
-    // 返回按钮
-    onClickLeft() {
-      this.$router.push("/home");
-    },
-    //每日推荐
-    async dailyRecommend() {
-      const res = await reqRecommend({ limit: 30 });
-      console.log(res);
-      if (res.data.code === 200) {
-        this.songList = res.data.result;
-        console.log(this.songList);
-      }
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    this.dailyRecommend();
+    this.id = this.$route.params.id;
+    // console.log(this.id);
+    this.getlist(this.id);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
@@ -85,42 +89,38 @@ export default {
   updated() {},
 };
 </script>
-<style>
-.daily-top {
-  position: relative;
+<style scoped>
+.nav {
   width: 100%;
-  height: 200px;
-  background: red;
-  background: url("http://p1.music.126.net/D9B_m3QXpLXMGW2e3KehJg==/109951165885500975.jpg?imageView&quality=89")
-    no-repeat;
-}
-.daily-top p {
-  font-size: 14px;
-  color: beige;
-  position: absolute;
-  bottom: 0;
-}
-.van-nav-bar .van-icon {
-  color: #fff;
-}
-.van-nav-bar__title {
-  color: #fff;
-}
-.van-nav-bar__text {
-  color: #fff;
-}
-.van-cell {
-  border-bottom: 1px solid #eee;
+  /* 不占位置 */
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgb(92, 146, 213);
   overflow: hidden;
+  color: #fff;
+  height: 50px;
+  z-index: 100;
 }
-.van-cell__left-icon {
-  font-size: 24px;
+.nav i {
+  margin-top: 20px;
 }
-.van-cell--30 span {
+.a {
+  display: flex;
+  align-items: center;
+}
+.a h1 {
+  width: 30px;
+  font-size: 16px;
   color: red;
 }
-
-.van-cell--30 .van-cell__title {
-  margin-left: 10px;
+.a .b {
+  flex: 1;
+}
+.a .b h2 {
+  font-weight: 600;
+}
+.a .icon {
+  width: 30px;
 }
 </style>
