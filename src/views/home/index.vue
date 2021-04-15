@@ -47,7 +47,7 @@ export default {
 </script>
 <style scoped>
 .home {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 .nav1 {
   opacity: 0.9;
