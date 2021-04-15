@@ -29,7 +29,7 @@
         <p class="wode-list-right">我的收藏<span>(0)</span></p>
       </div>
     </div>
-<<<<<<< HEAD
+
    <van-collapse v-model="activeNames" class="gedan">
   <van-collapse-item title="创建的歌单" name="1">
     <van-button type="primary" size="large" @click="chuangjiangedan"><van-icon name="plus" />创建新歌单</van-button>
@@ -119,7 +119,7 @@ export default {
   watch: {},
 
   methods: {
-<<<<<<< HEAD
+
     
     async  getTuijiangedan(){
     const result=await tuijianDedan();
