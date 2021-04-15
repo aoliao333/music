@@ -60,12 +60,12 @@ export default {
     },
     async getlist() {
       const res = await reqRecommend({ limit: 66 });
-      console.log(res);
+      /*  console.log(res); */
 
       if (res.status === 200) {
         // console.log(res.data.playlist.tracks[0]);
         this.list = res.data.result;
-        console.log(this.list);
+        /*  console.log(this.list); */
       }
     },
     godetial(id) {
