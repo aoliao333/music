@@ -1,5 +1,7 @@
 <template>
-  <div class="cart">cart1111111111111112312312312312312312312</div>
+  <div class="cart">
+    <van-notice-bar scrollable left-icon="volume-o" text="此功能还未开发" />
+  </div>
 </template>
 
 <script>
