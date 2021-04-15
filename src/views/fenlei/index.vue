@@ -29,7 +29,7 @@
     <van-button type="primary" size="large" @click="chuangjiangedan"><van-icon name="plus" />创建新歌单</van-button>
      
          <!-- <div class="gedan-list"  > -->
-            <div class="gedan-list"  v-for="(item,index) in playlists" :key="index">
+            <div class="gedan-list"  v-for="item in playlists" :key="item.id" @click="golist1(item.id)">
            <van-image
               width="75"
               height="75"
@@ -57,23 +57,14 @@
   </van-collapse>
   <div class="tuijian">
     <h3>推荐歌单</h3>
-   <van-row gutter="20">
-  <van-col span="8"><van-image
+   <van-row gutter="20" v-if="obj" >
+  <van-col span="8" v-for="item1 in obj.result.slice(0,3)" :key="item1.id"  @click="golist(item1.id)"><van-image
   height="10rem"
   fit="contain"
-  :src="obj.result[0].picUrl"
-/> <p>{{obj.result[0].name}}</p>
+  :src="item1.picUrl"
+/> <p>{{item1.name}}</p>
 </van-col>
-  <van-col span="8"><van-image
-  height="10rem"
-  fit="contain"
-  :src="obj.result[1].picUrl"
-/> <p>{{obj.result[1].name}}</p></van-col>
-  <van-col span="8"><van-image
-  height="10rem"
-  fit="contain"
-  :src="obj.result[3].picUrl"
-/> <p >{{obj.result[3].name}}</p></van-col>
+  
 </van-row>
   </div>
   </div>
@@ -86,6 +77,7 @@ import { Dialog } from 'vant';
 import {tuijianDedan} from '../../api/four/bendi'
 import {yonghuGedan} from '../../api/four/bendi'
 import {xinjiangedan} from '../../api/four/bendi'
+import {gedanXiangqing} from '../../api/list'
 
 export default {
   components: {
@@ -115,7 +107,8 @@ export default {
     const result=await tuijianDedan();
     if(result.status===200){
       this.obj=result.data;
-      console.log( this.obj.result[0]);  
+      console.log( this.obj.result.slice(0,3));  
+      
     }
   },
   async getWodegedan(id){
@@ -126,6 +119,10 @@ export default {
      console.log(this.playlists);
    }
 
+  },
+  async gedanaaa(id){
+    const res=await gedanXiangqing(id);
+    console.log(res);
   },
     showPopup() {
       this.show = true;
@@ -154,6 +151,16 @@ chuangjiangedan(){
      this.$router.push({ path:'/wodeshoucang'})
 
    },
+   golist(id) {
+      this.$router.replace(`/list1/${id}`);
+     
+    },
+     golist1(id) {
+      this.$router.replace(`/list1/${id}`);
+     
+
+    },
+    
    createXinjian(){
      console.log(11111111111111111111111111);
    },

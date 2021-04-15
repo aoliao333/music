@@ -37,7 +37,8 @@
         <div class="top1">
           <img :src="geshou.coverUrl" alt="" width="100" height="100" />
           <li v-for="(list, index) in geshou.artists" :key="index">
-            {{ index + 1 + "." }}{{ list.first }}-热度-{{ list.third }}
+            {{ index + 1 + "." }}{{ list.first
+            }}<van-icon name="fire-o" color="red" />{{ list.third }}
           </li>
         </div>
       </div>
@@ -83,19 +84,16 @@ export default {
     golist(id) {
       this.$router.replace(`/list/${id}`);
     },
-    golist1(id) {
-      this.$router.replace(`/list/${id}`);
-    },
 
     async getlist() {
-      console.log(1);
+      // console.log(1);
       const res = await reqToplist();
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         this.top = res.data.list;
         this.geshou = res.data.artistToplist;
         this.zhanshang = res.data.rewardToplist;
-        console.log(this.zhanshang);
+        // console.log(this.zhanshang);
       }
     },
   },
@@ -150,6 +148,7 @@ h3 {
   font-weight: 800;
 }
 .top1 {
+  width: 100%;
   overflow: hidden;
   margin-bottom: 3px;
 }
@@ -157,6 +156,7 @@ h3 {
   float: left;
 }
 .top1 li {
+  width: 250px;
   font-size: 15px;
   padding: 8px 5px;
   float: left;

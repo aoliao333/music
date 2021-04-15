@@ -1,8 +1,11 @@
 <template>
   <div class="musiclist">
-    <van-nav-bar title="" left-text="歌单" left-arrow fixed> </van-nav-bar>
+    <div class="nav">
+      <i class="el-icon-back" @click="gomusic"></i>
+    </div>
+
     <!-- 歌单列表 -->
-    <div class="tj">
+    <div class="tj" v-if="musicList">
       <div class="tuijian" v-for="item in musicList" :key="item.id">
         <img :src="item.coverImgUrl" alt="" />
         <p>{{ item.name }}</p>
@@ -19,6 +22,7 @@ export default {
   data() {
     return {
       musicList: [],
+      id: 0,
     };
   },
   //监听属性 类似于data概念
@@ -27,12 +31,15 @@ export default {
   watch: {},
 
   methods: {
+    gomusic() {
+      this.$router.replace("/home/music");
+    },
     //获取歌单
     async tuijian() {
       const res = await reqMusicList({ limit: 30 });
 
       if (res.status === 200) {
-        console.log(res.data.playlists);
+        // console.log(res.data.playlists);
         this.musicList = res.data.playlists;
       }
     },
@@ -50,8 +57,23 @@ export default {
 };
 </script>
 <style scoped>
+.nav {
+  width: 100%;
+  /* 不占位置 */
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgb(79, 140, 208);
+  overflow: hidden;
+  color: #fff;
+  height: 50px;
+  z-index: 100;
+}
+.nav i {
+  margin-top: 20px;
+}
 .tj {
-  padding-top: 45px;
+  padding-top: 55px;
 }
 .tuijian {
   float: left;

@@ -16,3 +16,7 @@ export const reqLyric = (data) => post(`/lyric${data}`);
 //  获取歌曲url
 
 export const reqSongsUrl = (data) => post(`/song/url${data}`);
+
+//  获取歌曲url
+
+export const reqUserList = (data) => post("/song/list", data);

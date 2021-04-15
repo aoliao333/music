@@ -23,5 +23,23 @@ const homechild = [
     //   },
     // ],
   },
+  {
+    path: "video",
+    name: "Video",
+    component: () => import("../../views/home/models/video"), // 路由懒加载
+    meta: {
+      title: "音乐",
+      showTabbar: true, //   登录前不显示底部导航
+    },
+  },
+  {
+    path: "diantai",
+    name: "Diantai",
+    component: () => import("../../views/home/models/diantai"), // 路由懒加载
+    meta: {
+      title: "音乐",
+      showTabbar: true, //   登录前不显示底部导航
+    },
+  }
 ];
 export default homechild;

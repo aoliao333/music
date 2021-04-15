@@ -1,10 +1,10 @@
 <template>
-  <div class="list">
+  <div class="list1">
     <div class="nav">
-      <i class="el-icon-back" @click="gopaihangbang"></i>
+      <i class="el-icon-back" @click="gohome"></i>
     </div>
     <div>
-      <img :src="coverImgUrl" alt="" height="375" width="100%" />
+      <img :src="ImgUrl" alt="" height="375" width="100%" />
       <van-cell title="播放全部" size="30" icon="play-circle-o"
         >{{ "共" + list.length + "首" }}
         <!-- 使用 right-icon 插槽来自定义右侧图标 -->
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import { reqPhblist } from "../../api/list";
+import { gedanXiangqing } from "../../api/list";
 export default {
   components: {},
   data() {
     return {
       id1: 0,
       id: 0,
-      coverImgUrl: "",
+      ImgUrl: "",
       list: [],
       loading: false,
       finished: false,
@@ -53,15 +53,17 @@ export default {
   watch: {},
 
   methods: {
-    gopaihangbang() {
-      this.$router.replace("/paihangbang");
+    gohome() {
+      this.$router.replace("/home/music");
     },
     async getlist(id1) {
-      const res = await reqPhblist({ id: id1 });
+      console.log(id1);
+      const res = await gedanXiangqing(id1);
       // console.log(res);
       if (res.status === 200) {
         // console.log(res.data.playlist.tracks[0]);
-        this.coverImgUrl = res.data.playlist.coverImgUrl;
+        console.log(res);
+        this.ImgUrl = res.data.playlist.coverImgUrl;
         this.list = res.data.playlist.tracks;
       }
     },
@@ -93,7 +95,7 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgb(92, 146, 213);
+  background-color: rgb(79, 140, 208);
   overflow: hidden;
   color: #fff;
   height: 50px;

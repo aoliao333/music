@@ -48,13 +48,16 @@
         ><span><van-icon name="friends-o"/></span
       ></router-link>
     </ul>
-    <div class="right"><a href="#/search"><van-icon name="search" /></a></div>
+    <div class="right">
+      <a href="#/search"><van-icon name="search"/></a>
+    </div>
   </div>
 </template>
 
 <script>
 import { getCookie } from "../../utils/util";
-
+import { delCookie } from "../../utils/util";
+import { Toast } from "vant";
 export default {
   components: {},
   data() {
@@ -100,8 +103,12 @@ export default {
       console.log("setting");
     },
     close() {
-      console.log("close");
-      this.$router.push("/detail");
+      Toast.success("退出成功", 2000);
+      setTimeout(() => {
+        delCookie("uid");
+        this.$router.push("/home");
+        this.$router.go(0);
+      }, 2000);
     },
   },
   //监听属性 类似于data概念
@@ -131,6 +138,7 @@ export default {
   left: 0;
   height: 40px;
   background-color: #d33a31;
+  overflow: hidden;
 }
 .footer .right {
   width: 10%;
@@ -143,6 +151,19 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
+  margin-top: 5px;
+}
+.footer .left i {
+  color: #fff;
+  font-size: 20px;
+}
+
+.footer .right {
+  margin-top: 5px;
+}
+.footer .right i {
+  color: #fff;
+  font-size: 20px;
 }
 .footer ul {
   display: flex;
@@ -157,6 +178,10 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
+  margin-top: 5px;
+}
+.footer ul li span {
+  font-size: 20px;
 }
 .active {
   background-color: #d33a31;

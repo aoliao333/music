@@ -2,7 +2,12 @@
   <div class="home">
     <Header></Header>
     <div class="nav">
-      <van-tabs v-model="activeName">
+      <van-tabs
+        class="nav1"
+        v-model="activeName"
+        color="red"
+        title-active-color="red"
+      >
         <van-tab title="音乐" name="a"><Music></Music></van-tab>
         <van-tab title="视频" name="b"><Video></Video></van-tab>
         <van-tab title="电台" name="c"><Diantai></Diantai></van-tab>
@@ -43,5 +48,8 @@ export default {
 <style scoped>
 .home {
   margin-top: 40px;
+}
+.nav1 {
+  opacity: 0.9;
 }
 </style>
