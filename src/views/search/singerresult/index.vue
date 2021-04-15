@@ -44,7 +44,7 @@ limit:10,
 type:this.$route.query.type,
 singerlist:[],
 show: false,
-page:1,
+page:0,
 loading: false,
 finished: false,
 };
