@@ -199,7 +199,7 @@ export default {
 </script>
 <style scoped>
 .fenlei {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 .wode {
   background: #f2f4f5;
