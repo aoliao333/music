@@ -57,6 +57,7 @@ methods: {
         this.text=m
         this.initial=n
         this.show = false;
+        this.page=0,
         this.singerlist=[],
         this.onLoad()
     },
