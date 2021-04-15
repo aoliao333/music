@@ -10,5 +10,6 @@ export const shoucanggeshouliebiao = (id) => get("/artist/album?id="+id);
 export const  xinjiangedan=(name)=>post('/playlist/create?name='+name)
 // export const  xinjiangedan=(name)=>post('/playlist/create?name='+name)
 export const  shoucanggeshoulist=(uid)=>get('/artist/sublist?uid='+uid)
+export const wodezhuanji1 = () => get("/album/sublist");
 
 

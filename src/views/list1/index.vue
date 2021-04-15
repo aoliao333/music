@@ -54,15 +54,15 @@ export default {
 
   methods: {
     gohome() {
-      this.$router.replace("/home/music");
+      this.$router.go(-1)
+    
     },
     async getlist(id1) {
-      console.log(id1);
+    
       const res = await gedanXiangqing(id1);
-      // console.log(res);
+      
       if (res.status === 200) {
-        // console.log(res.data.playlist.tracks[0]);
-        console.log(res);
+      
         this.ImgUrl = res.data.playlist.coverImgUrl;
         this.list = res.data.playlist.tracks;
       }
@@ -77,6 +77,8 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     this.id = this.$route.params.id;
+   
+    // this.$route.query.url
     // console.log(this.id);
     this.getlist(this.id);
   },

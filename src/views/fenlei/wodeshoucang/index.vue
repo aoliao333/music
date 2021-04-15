@@ -12,12 +12,7 @@
             <div class="zanwu">
                 <div class="shuzizhuanji" v-for="item in songs1" :key="item.id" @click="golist(item.id)">
                     <img :src="item.picUrl" alt="" width="75" height="75" >
-                    <!-- <van-image
-                            width="75"
-                            height="75"
-                            lazy-load
-                            :src="item.picUrl"
-                            /> -->
+                   
                     <dl>
                         <dt>{{item.name}}</dt>
                         <dd>{{item.artist.name}}</dd>
@@ -53,8 +48,10 @@
 
 <script>
 import {tuijianZhuanji} from '../../../api/four/bendi'
-import {shoucanggeshoulist} from '../../../api/four/bendi'
-import {zhuanjixiangqing} from '../../../api/list'
+import {getCookie} from '../../../utils/util'
+
+// import {wodezhuanji} from '../../../api/list'
+// import {wodezhuanji1} from '../../../api/four/bendi'
 
 export default {
     // inject:['reload'],
@@ -71,7 +68,8 @@ export default {
            songs1:null,
            songsss:null,
            tuijiansongs:null,
-           isRouterAlive: true
+           isRouterAlive: true,
+        
         };
     },
     computed: {},
@@ -85,55 +83,43 @@ export default {
         })
       },
          toFenlei(){
-     this.$router.push({ path:'/fenlei'})
+     this.$router.push('/fenlei')
         },
      async   getZhuanji(id){
             const result=await tuijianZhuanji(id);
-            console.log(result);
-            // console.log(result.status);
-            if (result.status==200) {
-                console.log(result.data.hotAlbums.slice(0,7));
+             if (result.status==200) {
                 this.songs=result.data.hotAlbums.slice(9,12);
-            //   this.reload();
-               
-            }
+             }
         },
-        
+       
     async  wodezhuanji(id){
-              const result=await tuijianZhuanji(id);
-            console.log(result);
-            // console.log(result.status);
+        if(getCookie('uid')){
+ const result=await tuijianZhuanji(id);
             if (result.status==200) {
-                console.log(result.data);
                 this.songs1=result.data.hotAlbums.slice(0,5);
-            //   this.reload();  
+         
             }    
+        }
+             
         },
-   async  geshouliebiao(id){
-        console.log(33333);
-        const result=await shoucanggeshoulist(id);
-        console.log(result);
-    },
-    async zhuanji(id){
-        const result=await zhuanjixiangqing(id);
-        console.log(result.data.songs);
-    },
+  
      golist(id) {
-    //   this.$router.replace(`/list1/${id}`);
-     console.log(id);
-    this.zhuanji(id)
+    this.$router.push(`/list2/${id}`);
+   
     },
     golist1(id) {
-      this.$router.replace(`/list2/${id}`);
-     console.log(id);
-    this.zhuanji(id)
+        console.log(this.url);
+      this.$router.push(`/list2/${id}`);
+   
+    
     },
     },
 
     created() {
+      
         this.getZhuanji(6472);
-        this.wodezhuanji(12871618);
-        this.geshouliebiao(339146651)
+        this.wodezhuanji(6452);
+      
     },
     mounted() {
         
