@@ -13,38 +13,46 @@
     <div class="van">
 <van-tabs v-model="active"  sticky  offset-top="70px">
   <van-tab title="单曲"  >
-            <ul>
-            <li v-for="(m,n) in singlist" :key="n"  @click="go(m.id)">
+        <ul>
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="singonLoad">
+            <li v-for="(m,n) in singlist" :key="n"  @click="gosing(m.id)">
                 <div class="right"><p>{{m.name}}</p><span>{{m.ar[0].name}}&nbsp;-&nbsp;{{m.al.name}}</span>
                 </div>
                 <div class="sandian fr">
                     <van-icon name="ellipsis" />
                 </div>
             </li>
+        </van-list>
         </ul>
   </van-tab>
   <van-tab title="歌手" >         
       <ul>
-        <li v-for="(m,n) in singerlist" :key="n">
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="singeronLoad">
+        <li v-for="(m,n) in singerlist" :key="n" @click="gosinger(m.id)">
                 <img :src="m.img1v1Url" alt="">
                 <div class="right"><p>{{m.name}}</p></div>
         </li>
+        </van-list>
         </ul>
     </van-tab>
   <van-tab title="专辑">
         <ul>
-        <li v-for="(m,n) in zhuanjilist" :key="n">
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="zhuanjionLoad">
+        <li v-for="(m,n) in zhuanjilist" :key="n" @click="gozhuanji(m.id)">
                 <img :src="m.picUrl" alt="">
                  <div class="right"><p>{{m.name}}</p><span>{{m.artist.name}}&nbsp;{{m.publishTime|dataForm}}</span></div>
         </li>
+        </van-list>
         </ul>
   </van-tab>
   <van-tab title="歌单">
       <ul>
-        <li v-for="(m,n) in gedanlist" :key="n" >
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="gedanonLoad">
+        <li v-for="(m,n) in gedanlist" :key="n"  @click="gogedan(m.id)">
                 <img :src="m.coverImgUrl" alt="">
                  <div class="right"><p>{{m.name}}</p><span>{{m.trackCount}}首&nbsp;by{{m.creator.nickname}}，播放{{(Number((m.playCount)/10000)).toFixed(1)}}万次</span></div>
         </li>
+        </van-list>
         </ul>
   </van-tab>
   <van-tab title="视频">
@@ -54,9 +62,10 @@
                  <div class="right"><p>{{m.title}}</p><span>{{m.durationms|durationms}}&nbsp;by&nbsp;{{m.creator[0].userName}}</span></div>
         </li>
         </ul>
-  </van-tab>
+  </van-tab> 
   <van-tab title="主播电台">
-            <ul>
+
+        <ul>
         <li v-for="(m,n) in diantailist" :key="n">
                 <img :src="m.picUrl" alt="">
                 <div class="right"><p>{{m.name}}</p>
@@ -66,20 +75,22 @@
   </van-tab>
   <van-tab title="用户">
         <ul>
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="useronLoad">
         <li v-for="(m,n) in userlist" :key="n" class="user">
                 <img :src="m.avatarUrl" alt="">
                 <div class="right"><p>{{m.nickname}}</p>
                 <span>{{m.signature}}</span></div>
         </li>
+        </van-list>
         </ul>
   </van-tab>
-
 </van-tabs>
 </div>
 </div>
 </template>
 <script>
 import {reqsinglist} from "../../../api/search/search"
+import {reqdiantailist} from "../../../api/search/search"
 export default {
 components: {},
 data() {
@@ -95,14 +106,27 @@ shipinlist:[],
 diantailist:[],
 userlist:[],
 lishilist:JSON.parse(localStorage.getItem('lishi')),
+userpage:1,
+gedanpage:1,
+zhuanjipage:1,
+singpage:1,
+singerpage:1,
+loading: false,
+finished: false,
 };
 },
 computed: {},
 watch: {},
 //方法集合
 methods: {
-    go(id){
+    gosing(id){
         this.$router.push({path:'/detail?id='+id})
+    },
+    gogedan(id){
+        this.$router.push({path:'/list1?id='+id})
+    },
+    zhuanji(id){
+        this.$router.push({path:'/list2?id='+id})
     },
     del(){
         this.val=''
@@ -110,7 +134,6 @@ methods: {
      submit(){
     this.$router.push({path:'/result',query:{keywords:this.val,type:this.type}});
     let lishi=JSON.parse(localStorage.getItem('lishi'));
-    console.log(lishi);
         if (lishi!=null) {
             lishi.unshift(this.val)
             this.lishilist=lishi
@@ -120,59 +143,89 @@ methods: {
             this.lishilist=lishi
             localStorage.setItem('lishi',JSON.stringify(lishi))
     }
-    this.initsinglist(this.val,1,this.limit)
-    this.initsingerlist(this.val,100,this.limit)
-    this.initzhuanjilist(this.val,10,this.limit)
-    this.initgedanlist(this.val,1000,this.limit)
+    this.singlist=[],
+    this.singerlist=[],
+    this.zhuanjilist=[]
+    this.gedanlist=[]
+    this.userlist=[]
+    this.singonLoad()
+    this.singeronLoad()
+    this.zhuanjionLoad()
+    this.gedanonLoad()
+    this.useronLoad()
     this.initshipinlist(this.val,1014,this.limit)
     this.initdiantailist(this.val,1009,this.limit)
-    this.inituserlist(this.val,1002,this.limit)
     },
     //单曲
-    async initsinglist(val,type,limit){
-        const result= await reqsinglist(val,type,limit);
-        this.singlist=result.data.result.songs
+    async  singonLoad(){
+    const  result= await reqsinglist(this.val,1,this.limit,this.singpage)
+    if (result.data.result.songs.length<10) {
+    this.finished=true
+    }else{
+    this.loading=false;
+    ++this.singpage;
+    this.singlist=this.singlist.concat(result.data.result.songs)
+    }
     },
     //歌手
-    async initsingerlist(val,type,limit){
-        const result= await reqsinglist(val,type,limit);
-        this.singerlist=result.data.result.artists
+    async  singeronLoad(){
+    const  result= await reqsinglist(this.val,100,this.limit,this.singerpage)
+    if (result.data.result.artists.length<10) {
+    this.finished=true
+    }else{
+    this.loading=false;
+    ++this.singerpage;
+    this.singerlist=this.singerlist.concat(result.data.result.artists)
+    }
     },
     //专辑
-    async initzhuanjilist(val,type,limit){
-        const result= await reqsinglist(val,type,limit);
-        this.zhuanjilist=result.data.result.albums
-    },
-    //歌单
-    async initgedanlist(val,type,limit){
-        const result= await reqsinglist(val,type,limit);
-        this.gedanlist=result.data.result.playlists
+    async  zhuanjionLoad(){
+    const  result= await reqsinglist(this.val,10,this.limit,this.zhuanjipage)
+    if (result.data.result.albums.length<10) {
+    this.finished=true
+    }else{
+    this.loading=false;
+    ++this.zhuanjipage;
+    this.zhuanjilist=this.zhuanjilist.concat(result.data.result.albums)
+    }
     },
     //视频
     async initshipinlist(val,type,limit){
-        const result= await reqsinglist(val,type,limit);
+        const result= await reqdiantailist(val,type,limit);
         this.shipinlist=result.data.result.videos
     },
-    //电台
+    // 电台
     async initdiantailist(val,type,limit){
-        const result= await reqsinglist(val,type,limit);
+        const result= await reqdiantailist(val,type,limit);
         this.diantailist=result.data.result.djRadios
     },
+    //歌单
+    async  gedanonLoad(){
+    const  result= await reqsinglist(this.val,1000,this.limit,this.gedanpage)
+    if (result.data.result.playlists.length<10) {
+    this.finished=true
+    }else{
+    this.loading=false;
+    ++this.gedanpage;
+    this.gedanlist=this.gedanlist.concat(result.data.result.playlists)
+    }
+    },
     //用户
-    async inituserlist(val,type,limit){
-        const result= await reqsinglist(val,type,limit);
-        this.userlist=result.data.result.userprofiles
+    async useronLoad(){
+    const  result= await reqsinglist(this.val,1002,this.limit,this.userpage)
+    if (result.data.result.userprofiles.length<10) {
+    this.finished=true
+    }else{
+    this.loading=false;
+    ++this.userpage;
+    this.userlist=this.userlist.concat(result.data.result.userprofiles)
+    }
     },
  },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-    this.initsinglist(this.val,1,this.limit)
-    this.initsingerlist(this.val,100,this.limit)
-    this.initzhuanjilist(this.val,10,this.limit)
-    this.initgedanlist(this.val,1000,this.limit)
     this.initshipinlist(this.val,1014,this.limit)
     this.initdiantailist(this.val,1009,this.limit)
-    this.inituserlist(this.val,1002,this.limit)
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {},

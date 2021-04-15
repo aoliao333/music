@@ -13,16 +13,24 @@
         </van-popup>
     <div class="bottom">
       <ul>
+          <van-list
+  v-model="loading"
+  :finished="finished"
+  finished-text="没有更多了"
+  @load="onLoad"
+>
         <li v-for="(m,n) in singerlist" :key="n">
                 <img :src="m.img1v1Url" alt="">
                 <div class="right"><p>{{m.name}}</p></div>
         </li>
+        </van-list>
         </ul>
     </div>
 </div>
 </template>
 <script>
 import {reqsingerlist} from "../../../api/search/search"
+
 export default {
 components: {},
 data() {
@@ -36,35 +44,44 @@ limit:10,
 type:this.$route.query.type,
 singerlist:[],
 show: false,
+page:1,
+loading: false,
+finished: false,
 };
 },
 computed: {},
 watch: {},
 //方法集合
 methods: {
-    // remen(){
-    //     this.text='热门歌手'
-    //     this.initial=-1
-    //      this.initlist(this.type,this.area,this.limit,this.initial)
-    // },
     ch(m,n){
         this.text=m
         this.initial=n
-         this.initlist(this.type,this.area,this.limit,this.initial)
-      this.show = false;
-
+        this.show = false;
+        this.singerlist=[],
+        this.onLoad()
     },
     showPopup() {
       this.show = true;
     },
-    async initlist(type,area,limit,initial){
-       const  result= await reqsingerlist(type,area,limit,initial)
-       this.singerlist=result.data.artists
+    async onLoad(){
+        const  result= await reqsingerlist(this.type,this.area,this.limit,this.initial,this.page)
+        if (result.data.artists.length<10) {
+    this.finished=true
+    }else{
+    this.loading=false;
+    ++this.page;
+    this.singerlist=this.singerlist.concat(result.data.artists)
     }
+    },
+
+    // async initlist(type,area,limit,initial,page){
+    //    const  result= await reqsingerlist(type,area,limit,initial,page)
+    //    this.singerlist=result.data.artists
+    // }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
-    this.initlist(this.type,this.area,this.limit,this.initial)
+    // this.initlist(this.type,this.area,this.limit,this.initial,this.page)
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {},

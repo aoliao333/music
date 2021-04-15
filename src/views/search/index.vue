@@ -111,6 +111,7 @@ beforeDestroy() {}, //生命周期 - 销毁之前
 </script>
 <style scoped>
 .lishi li{
+    color: #737575;
     padding: 0 10px;
     height: 40px;
     width: 355px;
@@ -130,6 +131,8 @@ beforeDestroy() {}, //生命周期 - 销毁之前
     background-color: #F2F4F5;
 }
 .hot p {
+    color: #737575;
+    margin-left: 15px;
     margin-bottom: 15px
 }
 .hot{

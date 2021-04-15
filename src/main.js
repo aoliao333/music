@@ -13,7 +13,9 @@ import { Lazyload } from "vant";
 import APlayer from "@moefe/vue-aplayer";
 
 import { Popup } from 'vant';
+import { List } from 'vant';
 
+Vue.use(List);
 Vue.use(Popup);
 Vue.use(Lazyload);
 Vue.config.productionTip = false;
