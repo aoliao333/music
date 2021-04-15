@@ -126,7 +126,7 @@ export default {
       this.show = !this.show;
     },
     onClickLeft() {
-      this.$router.push("/");
+      this.$router.go(-1);
     },
     // 获取歌手详情
     async artDetail(id) {
