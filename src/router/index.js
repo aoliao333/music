@@ -223,7 +223,24 @@ const router = new VueRouter({
         showTabbar: false, //   登录前不显示底部导航
       },
     },
+    {
+      path: "/list1/:id",
+      name: "List1",
+      component: () => import("../views/list1"), // 路由懒加载
 
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/list2/:id",
+      name: "List2",
+      component: () => import("../views/list2"), // 路由懒加载
+
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
     {
       path: "/search", //搜索
       name: "Search",
@@ -253,6 +270,22 @@ const router = new VueRouter({
       path: "/singerresult", // 搜索结果
       name: "Singerresult",
       component: () => import("../views/search/singerresult"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/bendiyinyue", // 搜索结果
+      name: "Bendiyinyue",
+      component: () => import("../views/fenlei/bendiyinyue"),
+      meta: {
+        showTabbar: false, //   登录前不显示底部导航
+      },
+    },
+    {
+      path: "/wodeshoucang", // 搜索结果
+      name: "Wodeshoucang",
+      component: () => import("../views/fenlei/wodeshoucang"),
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },

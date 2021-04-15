@@ -10,7 +10,7 @@
     <van-tabs >
         <van-tab title="专辑" name="a">
             <div class="zanwu">
-                <div class="shuzizhuanji" v-for="(item,index) in songs1.hotAlbums.slice(0,5)" :key="index">
+                <div class="shuzizhuanji" v-for="item in songs1" :key="item.id" @click="golist(item.id)">
                     <img :src="item.picUrl" alt="" width="75" height="75" >
                     <!-- <van-image
                             width="75"
@@ -27,7 +27,7 @@
             <div class="tuijian">
                 <p>最新专辑推荐</p>
                 <van-row gutter="20" >
-                <van-col span="8" v-for="(item1,index) in songs.hotAlbums.slice(0,3)" :key='index'><van-image
+                <van-col span="8" v-for="item1 in songs" :key='item1.id' @click="golist1(item1.id)  "><van-image
                 height="10rem"
                 fit="contain"
                 :src="item1.picUrl"
@@ -54,6 +54,7 @@
 <script>
 import {tuijianZhuanji} from '../../../api/four/bendi'
 import {shoucanggeshoulist} from '../../../api/four/bendi'
+import {zhuanjixiangqing} from '../../../api/list'
 
 export default {
     // inject:['reload'],
@@ -91,8 +92,8 @@ export default {
             console.log(result);
             // console.log(result.status);
             if (result.status==200) {
-                console.log(result.data);
-                this.songs=result.data;
+                console.log(result.data.hotAlbums.slice(0,7));
+                this.songs=result.data.hotAlbums.slice(9,12);
             //   this.reload();
                
             }
@@ -104,7 +105,7 @@ export default {
             // console.log(result.status);
             if (result.status==200) {
                 console.log(result.data);
-                this.songs1=result.data;
+                this.songs1=result.data.hotAlbums.slice(0,5);
             //   this.reload();  
             }    
         },
@@ -112,7 +113,21 @@ export default {
         console.log(33333);
         const result=await shoucanggeshoulist(id);
         console.log(result);
-    }
+    },
+    async zhuanji(id){
+        const result=await zhuanjixiangqing(id);
+        console.log(result.data.songs);
+    },
+     golist(id) {
+    //   this.$router.replace(`/list1/${id}`);
+     console.log(id);
+    this.zhuanji(id)
+    },
+    golist1(id) {
+      this.$router.replace(`/list2/${id}`);
+     console.log(id);
+    this.zhuanji(id)
+    },
     },
 
     created() {
