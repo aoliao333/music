@@ -28,9 +28,6 @@ const router = new VueRouter({
         showTabbar: false, //   登录前不显示底部导航
       },
       //home 子路由引入方法
-
-
-
     },
     {
       //头部导航第二个 首页
@@ -250,11 +247,7 @@ const router = new VueRouter({
       meta: {
         showTabbar: false, //   登录前不显示底部导航
       },
-
     },
-
-
-
 
     {
       path: "/singerresult", // 搜索结果

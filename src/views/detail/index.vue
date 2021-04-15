@@ -1,11 +1,11 @@
 <template>
   <div class="detail">
     <div class="top">
-      <van-nav-bar @click-left="onClickLeft" left-text="返回" left-arrow>
-        <template #right>
-          <van-icon name="bar-chart-o" size="18" />
-        </template>
-      </van-nav-bar>
+      <div class="left" @click="onClickLeft">
+        <van-icon size="18" name="arrow-left" /><i>返回</i>
+      </div>
+
+      <div class="right"><van-icon name="bar-chart-o" size="18" /></div>
     </div>
 
     <aplayer
@@ -18,7 +18,12 @@
       fixed
     ></aplayer>
 
-    <ul class="lrc-list" v-if="flag">
+    <div class="big" @click="cc" v-show="!show">
+      <div class="background">
+        <img :src="picUrl" width="100%" height="100%" alt="" />
+      </div>
+    </div>
+    <ul class="lrc-list" v-if="flag" @click="cc" v-show="show">
       <li v-for="item in songLyricsarr" :key="item.id">{{ item }}</li>
     </ul>
   </div>
@@ -35,6 +40,7 @@ export default {
       flag: false,
       //歌曲背景图
       picUrl: "",
+      show: true,
       //   歌名
       name: "",
       //歌手名
@@ -116,6 +122,9 @@ export default {
   watch: {},
 
   methods: {
+    cc() {
+      this.show = !this.show;
+    },
     onClickLeft() {
       this.$router.push("/");
     },
@@ -131,6 +140,8 @@ export default {
       this.audio.artist = res.data.songs[0].al.name;
       // 图片
       this.audio.cover = res.data.songs[0].al.picUrl;
+      this.picUrl = res.data.songs[0].al.picUrl;
+      console.log(this.picUrl);
       this.flag = true;
     },
     // 获取歌词
@@ -182,17 +193,91 @@ export default {
 };
 </script>
 <style scoped>
+.top {
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: rgb(91, 102, 113);
+  color: rgb(194, 208, 223);
+}
+.top .left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.top .left i {
+  vertical-align: middle;
+}
+.top .right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.top .right i {
+  vertical-align: middle;
+}
 .van-nav-bar {
   z-index: 100;
 }
 .lrc-list {
+  overflow: hidden;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: black;
+  background: linear-gradient(
+    rgb(91, 102, 113),
+    rgb(91, 102, 106),
+    rgb(49, 59, 75)
+  );
 }
 .lrc-list li {
-  color: rgb(147, 199, 214);
-  padding: 5px 0;
+  color: rgb(194, 208, 223);
+  padding: 8px 0;
+}
+.big {
+  width: 375px;
+  height: 667px;
+  position: fixed;
+  background: linear-gradient(
+    rgb(91, 102, 113),
+    rgb(91, 102, 106),
+    rgb(49, 59, 75)
+  );
+}
+.background {
+  width: 150px;
+  height: 150px;
+  background: rgb(91, 102, 106);
+  position: fixed;
+  left: 23%;
+  top: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 30px solid rgb(20, 20, 20);
+  animation: turn 10s linear infinite;
+}
+@keyframes turn {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  75% {
+    -webkit-transform: rotate(270deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 </style>
