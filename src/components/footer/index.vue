@@ -138,6 +138,7 @@ export default {
   left: 0;
   height: 40px;
   background-color: #d33a31;
+  overflow: hidden;
 }
 .footer .right {
   width: 10%;
@@ -150,6 +151,19 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
+  margin-top: 5px;
+}
+.footer .left i {
+  color: #fff;
+  font-size: 20px;
+}
+
+.footer .right {
+  margin-top: 5px;
+}
+.footer .right i {
+  color: #fff;
+  font-size: 20px;
 }
 .footer ul {
   display: flex;
@@ -164,6 +178,10 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
+  margin-top: 5px;
+}
+.footer ul li span {
+  font-size: 20px;
 }
 .active {
   background-color: #d33a31;

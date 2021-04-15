@@ -93,7 +93,7 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgb(79, 140, 208);
+  background-color: rgb(92, 146, 213);
   overflow: hidden;
   color: #fff;
   height: 50px;
