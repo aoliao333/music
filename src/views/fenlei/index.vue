@@ -29,13 +29,13 @@
     <van-button type="primary" size="large" @click="chuangjiangedan"><van-icon name="plus" />创建新歌单</van-button>
      
          <!-- <div class="gedan-list"  > -->
-            <div class="gedan-list"  v-for="item in playlists" :key="item.id" @click="golist1(item.id)">
+            <div class="gedan-list"   v-for="(item,index) in playlists" :key="index" @click="golist1(item.id)">
            <van-image
               width="75"
               height="75"
               :src="item.coverImgUrl"
             />
-            <dl class="gedan-list-right"><dd>{{item.name}}</dd><dt>0首</dt></dl>
+            <dl class="gedan-list-right"><dd>{{item.name}}</dd><dt>{{gedanchangdu[index]}}首</dt></dl>
             <van-button  type="default" is-link @click="showPopup"><van-icon class="gedanicon" name="ellipsis" />
           </van-button>
             <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
@@ -73,6 +73,7 @@
 <script>
 import Header from "../../components/header";
 import {isLogined} from '../../utils/util'
+import {getCookie} from '../../utils/util'
 import { Dialog } from 'vant';
 import {tuijianDedan} from '../../api/four/bendi'
 import {yonghuGedan} from '../../api/four/bendi'
@@ -94,6 +95,8 @@ export default {
       // message:
        gedanname:'',
        aaa:null,
+       gedanchangdu:[],
+       url:this.$route.path,
     };
   },
   //监听属性 类似于data概念
@@ -107,28 +110,31 @@ export default {
     const result=await tuijianDedan();
     if(result.status===200){
       this.obj=result.data;
-      console.log( this.obj.result.slice(0,3));  
-      
+   
+     
     }
   },
   async getWodegedan(id){
    if(isLogined()){
     const result=await yonghuGedan(id);
-  console.log(result.data.playlist)
+  
      this.playlists=result.data.playlist;
-     console.log(this.playlists);
+    
+     for (let i = 0; i < this.playlists.length; i++) {
+      this.gedanaaa(this.playlists[i].id);
+     }
    }
 
   },
   async gedanaaa(id){
     const res=await gedanXiangqing(id);
-    console.log(res);
+    const aa=res.data.playlist.tracks.length;
+    this.gedanchangdu.push(aa)
   },
     showPopup() {
       this.show = true;
     },
 chuangjiangedan(){
-      console.log(111111111);
       Dialog.confirm({
       title: '新建歌单',
       message: '<input type="text" v-model="gedanname"   placeholder="请输入歌单标题">',
@@ -136,7 +142,6 @@ chuangjiangedan(){
 })
   .then(() => {
     this.aaa=this.gedanname;
-    console.log(this.aaa);
        this.xinjiangedanaaa(this.gedanname)
     
   })
@@ -152,19 +157,12 @@ chuangjiangedan(){
 
    },
    golist(id) {
-      this.$router.replace(`/list1/${id}`);
+      this.$router.replace(`/list1/${id}?url=`+this.url);
      
     },
      golist1(id) {
-      this.$router.replace(`/list1/${id}`);
-     
-
-    },
-    
-   createXinjian(){
-     console.log(11111111111111111111111111);
-   },
-   
+      this.$router.replace(`/list1/${id}?url=`+this.url);  
+    },     
  async  xinjiangedanaaa(name){
    if(this.gedanname===''){
      console.log(3333);
@@ -173,9 +171,7 @@ chuangjiangedan(){
       const result =await xinjiangedan(name);
       console.log(5555,result);
     }
-   }
-    //  console.log(aaaa);
-   
+   } 
    }
   },
  
@@ -183,7 +179,7 @@ chuangjiangedan(){
   created() {
 
     this.getTuijiangedan();
-    this.getWodegedan(339146651);
+    this.getWodegedan(getCookie('uid'));
     
   },
   //生命周期 - 挂载完成（可以访问DOM元素）

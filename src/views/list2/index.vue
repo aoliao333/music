@@ -56,14 +56,15 @@ export default {
 
   methods: {
     gohome() {
-      this.$router.replace("/home/music");
+     
+      this.$router.replace(this.$route.query.url);
     },
     async getlist(id1) {
       console.log(id1);
       const res = await zhuanjixiangqing(id1);
-      // console.log(res);
+    
       if (res.status === 200) {
-        // console.log(res.data.playlist.tracks[0]);
+       
         console.log(res);
         this.ImgUrl = res.data.album.picUrl;
         this.list = res.data.songs;
@@ -79,7 +80,7 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     this.id = this.$route.params.id;
-    // console.log(this.id);
+    this.$route.query.url
     this.getlist(this.id);
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
