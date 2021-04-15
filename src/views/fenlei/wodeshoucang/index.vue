@@ -48,6 +48,8 @@
 
 <script>
 import {tuijianZhuanji} from '../../../api/four/bendi'
+import {getCookie} from '../../../utils/util'
+
 // import {wodezhuanji} from '../../../api/list'
 // import {wodezhuanji1} from '../../../api/four/bendi'
 
@@ -67,7 +69,7 @@ export default {
            songsss:null,
            tuijiansongs:null,
            isRouterAlive: true,
-         url:this.$route.path,
+        
         };
     },
     computed: {},
@@ -81,7 +83,7 @@ export default {
         })
       },
          toFenlei(){
-     this.$router.push({ path:'/fenlei'})
+     this.$router.push('/fenlei')
         },
      async   getZhuanji(id){
             const result=await tuijianZhuanji(id);
@@ -91,20 +93,23 @@ export default {
         },
        
     async  wodezhuanji(id){
-              const result=await tuijianZhuanji(id);
+        if(getCookie('uid')){
+ const result=await tuijianZhuanji(id);
             if (result.status==200) {
                 this.songs1=result.data.hotAlbums.slice(0,5);
-           
+         
             }    
+        }
+             
         },
   
      golist(id) {
-    this.$router.replace(`/list2/${id}?url=`+this.url);
+    this.$router.push(`/list2/${id}`);
    
     },
     golist1(id) {
         console.log(this.url);
-      this.$router.replace(`/list2/${id}?url=`+this.url);
+      this.$router.push(`/list2/${id}`);
    
     
     },

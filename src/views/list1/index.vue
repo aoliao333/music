@@ -78,7 +78,7 @@ export default {
   created() {
     this.id = this.$route.params.id;
    
-    this.$route.query.url
+    // this.$route.query.url
     // console.log(this.id);
     this.getlist(this.id);
   },

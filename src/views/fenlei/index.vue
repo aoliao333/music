@@ -109,7 +109,7 @@ export default {
        gedanname:'',
        aaa:null,
        gedanchangdu:[],
-       url:this.$route.path,
+      
 
     };
   },
@@ -130,7 +130,8 @@ export default {
     }
   },
   async getWodegedan(id){
-   if(isLogined()){
+   
+     
     const result=await yonghuGedan(id);
   
      this.playlists=result.data.playlist;
@@ -138,7 +139,7 @@ export default {
      for (let i = 0; i < this.playlists.length; i++) {
       this.gedanaaa(this.playlists[i].id);
      }
-   }
+   
 
   },
   async gedanaaa(id){
@@ -165,18 +166,18 @@ chuangjiangedan(){
   });
     },
    toBendiyinyue(){
-     this.$router.push({ path:'/bendiyinyue'})
+     this.$router.push("/bendiyinyue");
    },
    toWodeshoucang(){
-     this.$router.push({ path:'/wodeshoucang'})
+      this.$router.push("/wodeshoucang");
 
    },
    golist(id) {
-      this.$router.replace(`/list1/${id}?url=`+this.url);
+      this.$router.push(`/list1/${id}`);
      
     },
      golist1(id) {
-      this.$router.replace(`/list1/${id}?url=`+this.url);  
+      this.$router.push(`/list1/${id}`);  
     },     
  async  xinjiangedanaaa(name){
    if(this.gedanname===''){
@@ -194,7 +195,6 @@ chuangjiangedan(){
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     this.getTuijiangedan();
-
     this.getWodegedan(getCookie('uid'));
     
 
