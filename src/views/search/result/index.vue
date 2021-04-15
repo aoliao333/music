@@ -125,7 +125,7 @@ methods: {
     gogedan(id){
         this.$router.push({path:'/list1?id='+id})
     },
-    zhuanji(id){
+    gozhuanji(id){
         this.$router.push({path:'/list2?id='+id})
     },
     del(){
