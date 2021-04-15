@@ -106,11 +106,11 @@ shipinlist:[],
 diantailist:[],
 userlist:[],
 lishilist:JSON.parse(localStorage.getItem('lishi')),
-userpage:1,
-gedanpage:1,
-zhuanjipage:1,
-singpage:1,
-singerpage:1,
+userpage:0,
+gedanpage:0,
+zhuanjipage:0,
+singpage:0,
+singerpage:0,
 loading: false,
 finished: false,
 };
@@ -145,9 +145,14 @@ methods: {
     }
     this.singlist=[],
     this.singerlist=[],
-    this.zhuanjilist=[]
-    this.gedanlist=[]
-    this.userlist=[]
+    this.zhuanjilist=[],
+    this.gedanlist=[],
+    this.userlist=[],
+    this.userpage=0,
+    this.gedanpage=0,
+    this.zhuanjipage=0,
+    this.singpage=0,
+    this.singerpage=0,
     this.singonLoad()
     this.singeronLoad()
     this.zhuanjionLoad()
@@ -156,7 +161,7 @@ methods: {
     this.initshipinlist(this.val,1014,this.limit)
     this.initdiantailist(this.val,1009,this.limit)
     },
-    //单曲
+     //单曲
     async  singonLoad(){
     const  result= await reqsinglist(this.val,1,this.limit,this.singpage)
     if (result.data.result.songs.length<10) {
