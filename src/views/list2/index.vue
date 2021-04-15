@@ -56,8 +56,8 @@ export default {
 
   methods: {
     gohome() {
-     
-      this.$router.replace(this.$route.query.url);
+     this.$router.go(-1)
+      // this.$router.replace(this.$route.query.url);
     },
     async getlist(id1) {
       console.log(id1);

@@ -54,16 +54,15 @@ export default {
 
   methods: {
     gohome() {
+      this.$router.go(-1)
     
-      this.$router.replace( this.$route.query.url);
     },
     async getlist(id1) {
     
       const res = await gedanXiangqing(id1);
-      // console.log(res);
+      
       if (res.status === 200) {
-        // console.log(res.data.playlist.tracks[0]);
-       
+      
         this.ImgUrl = res.data.playlist.coverImgUrl;
         this.list = res.data.playlist.tracks;
       }
