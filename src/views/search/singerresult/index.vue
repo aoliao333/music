@@ -69,15 +69,10 @@ methods: {
     this.finished=true
     }else{
     this.loading=false;
-    ++this.page;
+    this.page+=10;
     this.singerlist=this.singerlist.concat(result.data.artists)
     }
     },
-
-    // async initlist(type,area,limit,initial,page){
-    //    const  result= await reqsingerlist(type,area,limit,initial,page)
-    //    this.singerlist=result.data.artists
-    // }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {

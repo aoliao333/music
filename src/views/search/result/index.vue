@@ -28,7 +28,7 @@
   <van-tab title="歌手" >         
       <ul>
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="singeronLoad">
-        <li v-for="(m,n) in singerlist" :key="n" @click="gosinger(m.id)">
+        <li v-for="(m,n) in singerlist" :key="n" >
                 <img :src="m.img1v1Url" alt="">
                 <div class="right"><p>{{m.name}}</p></div>
         </li>
@@ -123,10 +123,10 @@ methods: {
         this.$router.push({path:'/detail?id='+id})
     },
     gogedan(id){
-        this.$router.push({path:'/list1?id='+id})
+        this.$router.push({path:'/list1/'+id})
     },
     gozhuanji(id){
-        this.$router.push({path:'/list2?id='+id})
+        this.$router.push({path:'/list2/'+id})
     },
     del(){
         this.val=''
@@ -163,7 +163,7 @@ methods: {
     this.finished=true
     }else{
     this.loading=false;
-    ++this.singpage;
+    this.singpage+=10;
     this.singlist=this.singlist.concat(result.data.result.songs)
     }
     },
@@ -174,7 +174,7 @@ methods: {
     this.finished=true
     }else{
     this.loading=false;
-    ++this.singerpage;
+    this.singerpage+=10;
     this.singerlist=this.singerlist.concat(result.data.result.artists)
     }
     },
@@ -185,7 +185,7 @@ methods: {
     this.finished=true
     }else{
     this.loading=false;
-    ++this.zhuanjipage;
+    this.zhuanjipage+=10;
     this.zhuanjilist=this.zhuanjilist.concat(result.data.result.albums)
     }
     },
@@ -206,7 +206,7 @@ methods: {
     this.finished=true
     }else{
     this.loading=false;
-    ++this.gedanpage;
+    this.gedanpage+=10;
     this.gedanlist=this.gedanlist.concat(result.data.result.playlists)
     }
     },
@@ -217,7 +217,7 @@ methods: {
     this.finished=true
     }else{
     this.loading=false;
-    ++this.userpage;
+    this.userpage+=10;
     this.userlist=this.userlist.concat(result.data.result.userprofiles)
     }
     },
