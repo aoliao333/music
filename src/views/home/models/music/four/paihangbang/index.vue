@@ -37,7 +37,8 @@
         <div class="top1">
           <img :src="geshou.coverUrl" alt="" width="100" height="100" />
           <li v-for="(list, index) in geshou.artists" :key="index">
-            {{ index + 1 + "." }}{{ list.first }}-热度-{{ list.third }}
+            {{ index + 1 + "." }}{{ list.first
+            }}<van-icon name="fire-o" color="red" />{{ list.third }}
           </li>
         </div>
       </div>
@@ -81,9 +82,6 @@ export default {
       this.$router.replace("/home/music");
     },
     golist(id) {
-      this.$router.replace(`/list/${id}`);
-    },
-    golist1(id) {
       this.$router.replace(`/list/${id}`);
     },
 
@@ -150,6 +148,7 @@ h3 {
   font-weight: 800;
 }
 .top1 {
+  width: 100%;
   overflow: hidden;
   margin-bottom: 3px;
 }
@@ -157,6 +156,7 @@ h3 {
   float: left;
 }
 .top1 li {
+  width: 250px;
   font-size: 15px;
   padding: 8px 5px;
   float: left;

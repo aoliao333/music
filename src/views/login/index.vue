@@ -17,7 +17,7 @@
         :rules="[{ required: true, message: '请填写密码' }]"
       />
 
-      <div style="margin: 16px;">
+      <div style="margin: 16px">
         <van-button round block type="info" native-type="submit"
           >登录</van-button
         >
@@ -32,6 +32,7 @@
 import { reqLogin } from "../../api/user";
 import { setCookie } from "../../utils/util";
 import { Toast } from "vant";
+
 export default {
   components: {},
   data() {
@@ -61,6 +62,7 @@ export default {
       console.log(result);
       if (result.data.code === 200) {
         setCookie("uid", result.data.account.id, 500000);
+        setCookie("token", result.data.token, 500000);
         Toast.success("登录成功");
         this.$router.push("/home");
       } else if (result.code.status === 400) {

@@ -227,14 +227,20 @@ export default {
   text-align: center;
 }
 .circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
   margin-bottom: 10px;
+  border: 2px solid rgb(233, 187, 186);
 }
-.four p {
+p {
   font-size: 12px;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 .music {
   width: 100%;
@@ -255,13 +261,14 @@ export default {
 .zhiyu {
   float: left;
   width: 125px;
-  height: 170px;
+  height: 180px;
   font-size: 12px;
 }
 .zhiyu img {
-  width: 125px;
+  width: 123px;
   height: 125px;
   margin-bottom: 5px;
+  margin-left: 2px;
 }
 .list {
   width: 100%;
@@ -270,7 +277,7 @@ export default {
 .dujia {
   float: left;
   width: 185px;
-  height: 170px;
+  height: 180px;
   font-size: 12px;
 }
 .dujia img {
@@ -281,26 +288,31 @@ export default {
 .dujia:nth-child(3) img {
   width: 375px;
 }
+.dujia:nth-child(3) p {
+  width: 370px;
+}
 .mv {
   float: left;
   width: 185px;
-  height: 170px;
+  height: 180px;
   font-size: 12px;
 }
 .mv img {
-  width: 185px;
+  width: 184px;
   height: 125px;
   margin-bottom: 5px;
+  margin-left: 1px;
 }
 .diantai {
   float: left;
   width: 125px;
-  height: 170px;
+  height: 180px;
   font-size: 12px;
 }
 .diantai img {
-  width: 125px;
+  width: 123px;
   height: 125px;
   margin-bottom: 5px;
+  margin-left: 2px;
 }
 </style>
