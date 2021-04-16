@@ -50,16 +50,16 @@ export default {
     goreg() {
       this.$router.push("/reg");
     },
-    async onSubmit(values) {
-      console.log("submit", values);
+    async onSubmit() {
+      // console.log("submit", values);
       /* phone=18238630659&password=19971227lwk
         ?phone=18238630659&password=19971227lwk
        */
       var str = `?phone=${this.phone}&password=${this.password}`;
 
-      console.log(str);
+      // console.log(str);
       const result = await reqLogin(str);
-      console.log(result);
+      // console.log(result);
       if (result.data.code === 200) {
         setCookie("uid", result.data.account.id, 500000);
         setCookie("token", result.data.token, 500000);

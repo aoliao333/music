@@ -20,7 +20,7 @@
           :key="index"
         >
           <div class="a">
-            <h1 v-show="3">{{ index + 1 }}</h1>
+            <h1 :class="index < 3 ? 'red' : 'black'">{{ index + 1 }}</h1>
             <div class="b">
               <h2>{{ item.name }}</h2>
               <p>{{ item.ar[0].name }}-{{ item.name }}</p>
@@ -109,7 +109,13 @@ export default {
 .a h1 {
   width: 30px;
   font-size: 16px;
+  /* color: red; */
+}
+.red {
   color: red;
+}
+.black {
+  color: black;
 }
 .a .b {
   flex: 1;

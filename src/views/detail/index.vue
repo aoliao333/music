@@ -141,7 +141,7 @@ export default {
       // 图片
       this.audio.cover = res.data.songs[0].al.picUrl;
       this.picUrl = res.data.songs[0].al.picUrl;
-      console.log(this.picUrl);
+      // console.log(this.picUrl);
       this.flag = true;
     },
     // 获取歌词
@@ -177,7 +177,7 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     const id = this.$route.query.id;
-    console.log(id);
+    // console.log(id);
     this.id = id;
 
     this.artDetail(id);
